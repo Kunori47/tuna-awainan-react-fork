@@ -16,10 +16,11 @@ const fetchPost = async () => {
     if (error) {
         throw new Error(error.message);
     }
+    console.log(data)
     return data;
 }
 
-const getRole = async (id) => {
+const getRole = async (id: string) => {
   const { data: role, error } = await supabase
   .from("profiles")
   .select("role")
@@ -47,7 +48,7 @@ function ExpertComponent() {
 
   const { data: user } = useQuery({
     queryKey: ['profiles', session?.user?.id],
-    queryFn: () => getRole(session?.user?.id),
+    queryFn: () => session?.user?.id ? getRole(session.user.id) : Promise.resolve(undefined),
     enabled: !!session // Only run query if session exists
   });
 
@@ -101,7 +102,7 @@ function ExpertComponent() {
 
                       {/* Contenido del artículo */}
                       <div className="w-1/2 p-6 flex flex-col justify-between">
-                      <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900">
                           {post.title}
                       </h5>
                       <p className="mb-6 font-normal text-gray-700 dark:text-gray-400">
@@ -109,11 +110,11 @@ function ExpertComponent() {
                       </p>
 
                       <p className='font-light text-gray-400'>
-                        Autor: {post.profiles.username}
+                        Autor: {post.profiles ? post.profiles.username : 'Unknown Author'}
                         
                       </p>
                       <p className='font-light text-gray-400'>
-                        Fecha: {post.fecha}
+                        Fecha: {post.created_at ? new Date(post.created_at).toLocaleDateString() : 'Unknown Date'}
                       </p>
                       </div>
                   </li>

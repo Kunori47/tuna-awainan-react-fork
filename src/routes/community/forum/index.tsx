@@ -73,7 +73,7 @@ function CommunityComponent() {
 
                             {/* Contenido del artículo */}
                             <div className="w-1/2 p-6 flex flex-col justify-between">
-                            <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900">
                                 {foro.title}
                             </h5>
                             <p className="mb-6 font-normal text-gray-700 dark:text-gray-400">

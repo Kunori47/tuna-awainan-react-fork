@@ -43,7 +43,7 @@ function EspecimensComponent() {
                             <h2 className='text-5xl text-[#0cc0df] text-center mt-40'>{especimen.name}</h2>
                             <h3 className='text-4xl italic text-center mt-4 -ml-12'> &quot;{especimen.name_scientific}&quot; </h3>
                             <p className='text-center mt-4 mx-20'>&emsp;&emsp;{especimen.description}</p>
-                            <img src={especimen.image} className='m-auto mb-10 object-contain w-3/5 h-2/5'/>
+                            <img src={especimen.img} className='m-auto my-10 object-contain w-3/5 h-2/5'/>
                     </div>
 
             )}
