@@ -9,6 +9,9 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  build: {
+    target: 'esnext'
+  },
   plugins: [TanStackRouterVite({}), react()],
   resolve: {
     alias: {
