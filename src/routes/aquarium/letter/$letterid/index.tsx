@@ -9,7 +9,7 @@ export const Route = createFileRoute('/aquarium/letter/$letterid/')({
     component: EspecimensComponent,
 })
 
-const fetchEspecimensById = async (letterid) => {
+const fetchEspecimensById = async (letterid: string) => {
 
     const { data, error } = await supabase
     .from("specimens")
@@ -18,7 +18,8 @@ const fetchEspecimensById = async (letterid) => {
     .single();
 
     if (error) {
-        throw new Error(error.message)
+        console.error("Error fetching specimen:", error.message);
+        throw new Error(error.message);
     }
 
     return data;

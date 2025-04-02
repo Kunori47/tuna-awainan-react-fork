@@ -14,6 +14,7 @@ const fetchAqua = async (nameQueryToSearch: string | null ) =>{
     .like("name", `%${nameQueryToSearch}%`)
 
     if (error) {
+        console.error("Error fetching specimen:", error.message);
         throw new Error(error.message);
     }
 
