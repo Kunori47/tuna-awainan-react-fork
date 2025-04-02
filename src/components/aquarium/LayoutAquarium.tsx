@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabase"
 import { ButtonLetter } from "./ButtonLetter"
 
-const { data , error } = await supabase.from("especimens").select("*")
+const { data , error } = await supabase.from("specimens").select("*")
 
 const letterAllowed = new Set()
 

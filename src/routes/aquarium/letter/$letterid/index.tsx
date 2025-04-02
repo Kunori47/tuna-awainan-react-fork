@@ -12,7 +12,7 @@ export const Route = createFileRoute('/aquarium/letter/$letterid/')({
 const fetchEspecimensById = async (letterid) => {
 
     const { data, error } = await supabase
-    .from("especimens")
+    .from("specimens")
     .select("*")
     .eq("id", letterid)
     .single();

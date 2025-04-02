@@ -10,7 +10,7 @@ export const Route = createFileRoute('/community/forum/')({
 
 const fetchForum = async () => {
     const { data, error } = await supabase
-    .from("Foros")
+    .from("posts")
     .select("*, profiles(username)");
 
     if (error) {

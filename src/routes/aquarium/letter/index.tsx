@@ -9,7 +9,7 @@ export const Route = createFileRoute('/aquarium/letter/')({
 
 const fetchAqua = async (nameQueryToSearch: string | null ) =>{
     const { data, error } = await supabase
-    .from("especimens")
+    .from("specimens")
     .select("*")
     .like("name", `%${nameQueryToSearch}%`)
 
@@ -24,7 +24,7 @@ function LetterComponent() {
     const querySearch = new URLSearchParams(window.location.search)
     const nameQueryToSearch = querySearch.get('selected')
 
-    const { data: aquarium, error, isLoading } = useQuery({ queryKey: ['especimens', nameQueryToSearch], queryFn: () => fetchAqua(nameQueryToSearch) });
+    const { data: aquarium, error, isLoading } = useQuery({ queryKey: ['specimens', nameQueryToSearch], queryFn: () => fetchAqua(nameQueryToSearch) });
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
 

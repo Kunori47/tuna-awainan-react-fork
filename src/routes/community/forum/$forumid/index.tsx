@@ -16,7 +16,7 @@ export const Route = createFileRoute('/community/forum/$forumid/')({
 
 const fetchForumById = async (forumid) =>{
   const { data, error } = await supabase
-  .from("Foros")
+  .from("posts")
   .select("*, profiles(username)")
   .eq("id", forumid)
   .single()
