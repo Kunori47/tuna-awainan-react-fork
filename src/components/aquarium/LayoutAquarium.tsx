@@ -3,14 +3,14 @@ import { ButtonLetter } from "./ButtonLetter"
 
 const { data , error } = await supabase.from("specimens").select("*")
 
-const letterAllowed = new Set()
+const letterAllowed = new Set<string>()
 
 data?.forEach((animal) => {
     const firstLetter = animal.name.charAt(0).toUpperCase()
     letterAllowed.add(firstLetter)
 })
 
-const aquarium = Array.from(letterAllowed).sort()
+const aquarium: string[] = Array.from(letterAllowed).sort()
 
 export function LayoutAquarium(){
     return (

@@ -3,7 +3,7 @@ const querySearch = new URLSearchParams(window.location.search);
 const nameQueryToSearch = querySearch.get('selected');
 const name = nameQueryToSearch || "";
 
-export function ButtonLetter({ letter }){
+export function ButtonLetter({ letter }: { letter: string }){
 
     return(
     <a
