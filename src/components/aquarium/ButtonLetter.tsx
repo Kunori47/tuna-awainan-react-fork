@@ -10,7 +10,7 @@ export function ButtonLetter({ letter }: { letter: string }){
       type="button"
       href={`/aquarium/letter?selected=${letter}`}
       className={[
-        "cursor-pointer focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-sm text-center inline-flex items-center font-bold me-2 px-3.5 py-2.5 hover:bg-[#0cc0df] hover:opacity-80 transition",
+        "cursor-pointer focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-md text-center inline-flex items-center font-bold me-2 px-3.5 py-2.5 hover:bg-[#0cc0df] text-lg hover:opacity-80 transition",
         name === letter ? "bg-white text-#0cc0df" : "text-white hover:text-#0cc0df hover:text-white"
       ].join(' ')}
     >

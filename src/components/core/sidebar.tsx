@@ -21,7 +21,7 @@ export function AppSidebar() {
 
   return (
     <Sidebar >
-      <SidebarContent className="flex flex-col justify-center mb-20">
+      <SidebarContent className="flex flex-col justify-center">
         <SidebarGroup className="px-4">
           <img src="https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/sign/files/logo/TUNA-awainan.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJmaWxlcy9sb2dvL1RVTkEtYXdhaW5hbi5wbmciLCJpYXQiOjE3NDM1NjYwNTUsImV4cCI6NDg5NzE2NjA1NX0.tRWlx0VtwQWAB7mZ6AckSbxDk-9mq70fF-HYaWi-PkY" alt="" className="w-32 h-32 mx-auto"/>
           <h2 className="scroll-m-20 pb-2 text-4xl font-semibold tracking-tight text-center first:mt-0">
