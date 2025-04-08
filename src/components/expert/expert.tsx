@@ -37,7 +37,7 @@ export function Expert(){
                           className="flex flex-row bg-white shadow-md rounded-lg overflow-hidden mb-16  xl:h-64 lg:h-72 md:h-80"
                       >
                           {/* Imagen del artículo */}
-                          <div className="w-1/2 h-auto">
+                          <div className="w-1/2 h-full">
                           <img
                               className="object-cover w-full h-full"
                               src={post.img}
@@ -48,9 +48,6 @@ export function Expert(){
                           {/* Contenido del artículo */}
                           <div className="w-1/2 p-6 flex flex-col justify-between">
                           <span className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            {index === 0 ? (
-                                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                                ) : null    }
                               {post.title}
                           </span>
                           <p className="mb-6 font-normal text-gray-700 dark:text-gray-400">
