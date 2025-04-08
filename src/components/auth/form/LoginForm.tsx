@@ -81,7 +81,7 @@ export function LoginForm() {
       className="flex flex-col gap-6" >
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold">
-          Bienvenido de vuelta! 👋
+          ! Bienvenido de vuelta ! 👋
         </h1>
         <p className="text-balance text-sm text-muted-foreground">
           Inicia sesión para continuar

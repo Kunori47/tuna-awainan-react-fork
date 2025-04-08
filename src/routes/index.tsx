@@ -16,7 +16,7 @@ function HomeComponent() {
             DE AGUA
         </h1>
         <h3 className='text-white text-4xl font-semibold'>Y tú, ¿qué esperas?</h3>
-        <Button className='hover:bg-[#087b9b] text-md md:text-lg'> 
+        <Button className='hover:bg-[#087b9b] text-md md:text-lg shadow-md'> 
           <Link to={'/about'}>
             Saber más 
           </Link>
