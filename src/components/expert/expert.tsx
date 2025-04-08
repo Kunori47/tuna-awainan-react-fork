@@ -34,7 +34,8 @@ export function Expert(){
                       posts.slice(0, 2).map((post, index) => (
                       <Link to={'/experto/post/$postid'} params={{postid: post.id}}>
                       <li
-                          className="flex flex-row bg-white shadow-md rounded-lg overflow-hidden mb-16  xl:h-64 lg:h-72 md:h-80"
+                          className="flex flex-row bg-white shadow-md rounded-lg overflow-hidden mb-16  xl:h-64 lg:h-72 md:h-80
+                                hover:shadow-xl  hover:border-1 hover:border-[#80808083] hover:cursor-pointer"                  
                       >
                           {/* Imagen del artículo */}
                           <div className="w-1/2 h-full">
