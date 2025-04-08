@@ -22,11 +22,11 @@ export function Expert(){
       });    
 
     return (
-        <section className="w-1/2 px-24 sm:px-5 grid grid-cols-1 mx-auto">
-        <div className="font-custom max-w-screen-lg gap-8">
+        <section className="w-full px-24 sm:px-5 grid grid-cols-1 mx-auto">
+        <div className="font-custom max-w-screen-lg mx-auto gap-8 lg:px-[6rem] md:px-[6rem]">
             <div className="flex flex-col gap-4">
                 <header>
-                    <h2 className="text-5xl font-bold text-start my-6 mb-4">Hablando con Expertos</h2>
+                    <h2 className="text-3xl font-bold text-center my-8 mb-2">Hablando con Expertos</h2>
                 </header>
                 <div className="card">
                   <ul className="grid grid-cols-1">
@@ -34,8 +34,7 @@ export function Expert(){
                       posts.slice(0, 2).map((post, index) => (
                       <Link to={'/experto/post/$postid'} params={{postid: post.id}}>
                       <li
-                          
-                          className="flex flex-row bg-white shadow-md rounded-lg overflow-hidden mb-16"
+                          className="flex flex-row bg-white shadow-md rounded-lg overflow-hidden mb-16  xl:h-64 lg:h-72 md:h-80"
                       >
                           {/* Imagen del artículo */}
                           <div className="w-1/2 h-auto">
