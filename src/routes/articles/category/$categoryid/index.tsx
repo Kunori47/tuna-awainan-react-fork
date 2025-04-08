@@ -36,7 +36,7 @@ function ArticleComponent() {
     if (error) return <div>Error: {error.message}</div>;
 
     return (
-        <><Button className='m-8'>
+        <><Button className='m-8 hover:text-gray-700'>
             <Link to={'/articles/category'}>
                 Atrás
             </Link>

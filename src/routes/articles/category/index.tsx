@@ -73,8 +73,8 @@ function ArticleRouteComponent() {
                     <p className="mb-6 font-normal text-gray-700 dark:text-gray-400">
                         {article.description.substring(0, 290) + "..."}
                     </p>
-                    <Button className="hover:bg-[#087b9b]">
-                        <Link to={'/articles/category/$categoryid'} params={{categoryid: article.id}}>Leer</Link>
+                    <Button className="w-1/6 hover:bg-[#087b9b]">
+                        <Link to={'/articles/category/$categoryid'} params={{categoryid: article.id}}>Leer  → </Link>
                     </Button>
                     </div>
                 </li>

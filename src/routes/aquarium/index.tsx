@@ -6,9 +6,7 @@ import { createFileRoute } from '@tanstack/react-router'
 export const Route = createFileRoute('/aquarium/')({
   component: AquariumComponent,
 })
-
 function AquariumComponent() {
-
   return (
     <div className='min-h-screen flex flex-col'>
         <LayoutAquarium></LayoutAquarium>
@@ -26,6 +24,5 @@ function AquariumComponent() {
           </div>
         </section>
     </div>
-
   )
 }
