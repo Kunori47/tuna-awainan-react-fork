@@ -74,7 +74,7 @@ function ExpertComponent() {
                 <Link to={'/experto/post/new'}>Crear un nuevo post</Link>
               </Button>
             ) : (
-              <Button className='w-1/6 hover:bg-[#087b9b]'>
+              <Button className='w-[210px] hover:bg-[#087b9b] text-white'>
                 <a href="mailto:grupotunawainan@gmail.com?subject=Solicitud para crear posts&body=Coloque su usuario y escriba la razon del porque quiere crear un post en la pagina.">
                   Solicitud para crear posts
                 </a>
