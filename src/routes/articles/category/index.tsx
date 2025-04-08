@@ -86,9 +86,6 @@ function ArticleRouteComponent() {
                         </p>
                         <p className="font-light text-gray-400">
                             Fecha: 08/04/2025
-                            {/* {foro.created_at
-                                ? new Date(foro.created_at).toLocaleDateString()
-                                : "Unknown Date"} */}
                         </p>
                     </div>
                 </li>
