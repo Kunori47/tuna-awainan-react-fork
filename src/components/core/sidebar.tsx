@@ -22,51 +22,53 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarContent className="flex flex-col h-full py-0">
-        <SidebarGroup className="px-4 pt-12">
-          <img src="https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/sign/files/logo/TUNA-awainan.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJmaWxlcy9sb2dvL1RVTkEtYXdhaW5hbi5wbmciLCJpYXQiOjE3NDM1NjYwNTUsImV4cCI6NDg5NzE2NjA1NX0.tRWlx0VtwQWAB7mZ6AckSbxDk-9mq70fF-HYaWi-PkY" alt="" className="w-20 h-20 mx-auto"/>
-          <h2 className="text-2xl font-semibold tracking-tight text-center pb-0 mt-0">
+        <SidebarGroup className="px-4 pt-5">
+          <img src="https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/sign/files/logo/TUNA-awainan.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJmaWxlcy9sb2dvL1RVTkEtYXdhaW5hbi5wbmciLCJpYXQiOjE3NDM1NjYwNTUsImV4cCI6NDg5NzE2NjA1NX0.tRWlx0VtwQWAB7mZ6AckSbxDk-9mq70fF-HYaWi-PkY" alt="" className="w-28 h-28 mx-auto"/>
+          <h2 className="scroll-m-20 pb-2 text-4xl font-semibold tracking-tight text-center first:mt-0">
             TUNA
           </h2>
-          <h2 className="text-2xl text-primary font-semibold tracking-tight text-center pb-0 mt-0">
+          <h2 className="scroll-m-20 pb-2 text-4xl
+          text-primary font-semibold tracking-tight text-center first:mt-0">
             AWAINAN
           </h2>
         </SidebarGroup>
-        <SidebarGroup className="flex flex-col gap-1 flex-1 pt-0 justify-center items-start start-14">
-          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-lg">
+        <SidebarGroup className="flex flex-col gap-4 overflow-auto">
+          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
             <Link to="/">Inicio</Link>
           </Button>
-          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-lg">
+          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
             <Link to="/novedades">Novedades</Link>
           </Button>
-          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-lg">
+          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
             <Link to="/aquarium">Acuario</Link>
           </Button>
-          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-lg">
+          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
             <Link to="/articles/introArticles">Artículos</Link>
           </Button>
-          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-lg">
+          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
             <Link to="/experto/introExperto">Expertos</Link>
           </Button>
-          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-lg">
+          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
             <Link to="/community/introCommunity">Comunidad</Link>
           </Button>
-          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-lg">
+          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
             <Link to="/about">Sobre nosotros</Link>
           </Button>
           {
             session ? (
               <Button
                 onClick={() => lgoutMutaion.mutate()}
-                variant={"sidebarLink"} size={"sidebarLink"} className="text-lg">
+                variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
                 Logout
               </Button>
             ) : (
-              <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-lg">
+              <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
                 <Link to="/auth/login">Iniciar sesión</Link>
               </Button>
             )
           }
         </SidebarGroup>
+
       </SidebarContent>
       <SidebarFooter />
     </Sidebar>
