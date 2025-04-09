@@ -22,7 +22,7 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarContent className="flex flex-col h-full py-0">
-        <SidebarGroup className="px-4 pt-5">
+        <SidebarGroup className="px-4 pt-10">
           <img src="https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/sign/files/logo/TUNA-awainan.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJmaWxlcy9sb2dvL1RVTkEtYXdhaW5hbi5wbmciLCJpYXQiOjE3NDM1NjYwNTUsImV4cCI6NDg5NzE2NjA1NX0.tRWlx0VtwQWAB7mZ6AckSbxDk-9mq70fF-HYaWi-PkY" alt="" className="w-28 h-28 mx-auto"/>
           <h2 className="scroll-m-20 pb-2 text-4xl font-semibold tracking-tight text-center first:mt-0">
             TUNA
@@ -32,7 +32,7 @@ export function AppSidebar() {
             AWAINAN
           </h2>
         </SidebarGroup>
-        <SidebarGroup className="flex flex-col gap-4 overflow-auto">
+        <SidebarGroup className="flex flex-col gap-1 flex-1 pt-0 justify-center items-start start-5">
           <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
             <Link to="/">Inicio</Link>
           </Button>
