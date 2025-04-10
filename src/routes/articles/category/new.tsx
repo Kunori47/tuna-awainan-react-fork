@@ -1,58 +1,64 @@
-import { Button } from "@/components/ui/button";
-import { supabase } from "@/lib/supabase";
-import { getProfileId, getSession } from "@/services/auth";
-import { setForum } from "@/services/submit";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/lib/supabase";
+import { setArticles } from "@/services/submit";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const Route = createFileRoute("/community/forum/new")({
-	component: NewForumComponent,
+export const Route = createFileRoute("/articles/category/new")({
+	component: RouteComponent,
 });
 
-function NewForumComponent() {
+const fetchCategory = async () => {
+	const { data, error } = await supabase.from("tags").select("*");
+
+	if (error) {
+		console.error(error);
+	}
+
+	return data;
+};
+
+function RouteComponent() {
 	const { toast } = useToast();
 	const queryClient = useQueryClient();
 
-	const { data: session } = useQuery({
-		queryKey: ["session"],
-		queryFn: getSession,
-	});
-
-	const { data: id_user } = useQuery({
-		queryKey: ["profiles"],
-		queryFn: () => getProfileId(session?.user.id),
+	const { data: category } = useQuery({
+		queryKey: ["category"],
+		queryFn: fetchCategory,
 	});
 
 	const mutation = useMutation({
-		mutationFn: ({ title, content, imageUrl }) =>
-			setForum(title, content, id_user, imageUrl),
+		mutationFn: ({ title, content, imageUrl, category, author }) =>
+			setArticles(title, content, imageUrl, category, author),
 		onSuccess: () => {
+			// Invalidate and refetch
 			toast({
-				title: "Post creado correctamente 😀",
+				title: "Articulo creado correctamente 😀",
 			});
-			queryClient.invalidateQueries({ queryKey: ["posts"] });
+			queryClient.invalidateQueries({ queryKey: ["articles"] });
 		},
 		onError: () => {
 			toast({
-				title: "Error al crear el post 😞",
+				title: "Error al crear el Articulo 😞",
 			});
 		},
 	});
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
 		const title = formData.get("title");
 		const content = formData.get("content");
 		const file = formData.get("image");
+		const author = formData.get("author");
+		const category = formData.get("category");
 
 		let imageUrl = null;
 
 		if (file) {
 			const { data, error } = await supabase.storage
 				.from("files")
-				.upload(`posts/${title}`, file);
+				.upload(`articles/${title}`, file);
 
 			if (error) {
 				console.error(error);
@@ -60,18 +66,17 @@ function NewForumComponent() {
 
 			imageUrl = data?.path;
 		}
-		mutation.mutate({ title, content, imageUrl });
+		mutation.mutate({ title, content, imageUrl, category, author });
 		e.target.reset();
 	};
-
 	return (
 		<section className="bg-white dark:bg-gray-900">
 			<Button className="m-8 hover:bg-[#087b9b]">
-				<Link to={"/community/forum"}>Atrás</Link>
+				<Link to={"/articles/category"}>Atrás</Link>
 			</Button>
 
 			<div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-				<h2 className="mb-4 text-xl font-bold text-gray-900">
+				<h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
 					Añadir nueva publicación
 				</h2>
 				<form onSubmit={handleSubmit}>
@@ -110,6 +115,38 @@ function NewForumComponent() {
 							></textarea>
 						</div>
 
+						<div className="sm:col-span-2">
+							<label
+								htmlFor="author"
+								className="block mb-2 text-sm font-medium text-gray-900"
+							>
+								Autor / Referencia
+							</label>
+							<input
+								type="text"
+								name="author"
+								id="author"
+								className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0cc0df] focus:border-[#0cc0df] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0cc0df] dark:focus:border-[#0cc0df]"
+								placeholder="Referencia o Autor de la publicación"
+								required
+							/>
+						</div>
+
+						<div>
+							<label
+								htmlFor="category"
+								className="block mb-2 text-sm font-medium text-gray-900"
+							>
+								Categoria
+							</label>
+							<select name="category" id="category">
+								{category &&
+									category.map((category) => (
+										<option value={category.id}>{category.name}</option>
+									))}
+							</select>
+						</div>
+
 						<div>
 							<label
 								htmlFor="image"
@@ -117,7 +154,7 @@ function NewForumComponent() {
 							>
 								Imagen
 							</label>
-							<input type="file" name="image" id="image" accept="posts/*" />
+							<input type="file" name="image" id="image" accept="articles/*" />
 						</div>
 					</div>
 					<button

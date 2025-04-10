@@ -8,7 +8,7 @@ export const Route = createFileRoute('/')({
 
 function HomeComponent() {
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-2 font">
+    <div className="grid grid-cols-1 md:grid-cols-2 font">
       <div className='flex flex-col gap-4 items-center justify-center h-screen bg-[#0cc0df]'>
         <h1 className='text-7xl leading-tight text-center text-white font-extrabold dark:text-white'>
             OTROS YA<br /> PUSIERON <br />

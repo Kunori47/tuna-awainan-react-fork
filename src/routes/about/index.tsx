@@ -8,7 +8,7 @@ export const Route = createFileRoute('/about/')({
 
 function AboutComponent() {
 
-  return (<div className='grid grid-cols-1 xl:grid-cols-2'>
+  return (<div className='grid grid-cols-1 md:grid-cols-2'>
     <div className='font-custom flex flex-col items-center justify-center h-screen'>
       <h1 className='text-5xl leading-tight text-center font-extrabold text-[#0cc0df]'>
         SOBRE TUNA <br />AWAINAN 

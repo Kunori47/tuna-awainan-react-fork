@@ -1,16 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
 import { getProfileId, getSession } from "@/services/auth";
-import { setForum } from "@/services/submit";
+import { setSpecimens } from "@/services/submit";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useToast } from "@/hooks/use-toast";
 
-export const Route = createFileRoute("/community/forum/new")({
-	component: NewForumComponent,
+export const Route = createFileRoute("/aquarium/letter/new")({
+	component: RouteComponent,
 });
 
-function NewForumComponent() {
+function RouteComponent() {
 	const { toast } = useToast();
 	const queryClient = useQueryClient();
 
@@ -25,17 +25,17 @@ function NewForumComponent() {
 	});
 
 	const mutation = useMutation({
-		mutationFn: ({ title, content, imageUrl }) =>
-			setForum(title, content, id_user, imageUrl),
+		mutationFn: ({ name, scientific_name, description, imageUrl }) =>
+			setSpecimens(name, scientific_name, description, imageUrl),
 		onSuccess: () => {
 			toast({
-				title: "Post creado correctamente 😀",
+				title: "Especimen agregado correctamente 😀",
 			});
 			queryClient.invalidateQueries({ queryKey: ["posts"] });
 		},
 		onError: () => {
 			toast({
-				title: "Error al crear el post 😞",
+				title: "Error al agregar el especimen 😞",
 			});
 		},
 	});
@@ -43,16 +43,29 @@ function NewForumComponent() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
-		const title = formData.get("title");
-		const content = formData.get("content");
+		const value_nombre = formData.get("nombre");
+		const value_scientific = formData.get("scientific_name");
+		const description = formData.get("description");
 		const file = formData.get("image");
+
+		let scientific_name = value_scientific;
+
+		let name = value_nombre;
+
+		name =
+			value_nombre.charAt(0).toUpperCase() +
+			value_nombre.slice(1).toLowerCase();
+
+		scientific_name =
+			value_scientific.charAt(0).toUpperCase() +
+			value_scientific.slice(1).toLowerCase();
 
 		let imageUrl = null;
 
 		if (file) {
 			const { data, error } = await supabase.storage
 				.from("files")
-				.upload(`posts/${title}`, file);
+				.upload(`specimens/${name}`, file);
 
 			if (error) {
 				console.error(error);
@@ -60,52 +73,69 @@ function NewForumComponent() {
 
 			imageUrl = data?.path;
 		}
-		mutation.mutate({ title, content, imageUrl });
+		mutation.mutate({ name, scientific_name, description, imageUrl });
 		e.target.reset();
 	};
 
 	return (
 		<section className="bg-white dark:bg-gray-900">
 			<Button className="m-8 hover:bg-[#087b9b]">
-				<Link to={"/community/forum"}>Atrás</Link>
+				<Link to={"/aquarium"}>Atrás</Link>
 			</Button>
 
 			<div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
 				<h2 className="mb-4 text-xl font-bold text-gray-900">
-					Añadir nueva publicación
+					Añadir nuevo especimen
 				</h2>
 				<form onSubmit={handleSubmit}>
 					<div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
 						<div className="sm:col-span-2">
 							<label
-								htmlFor="title"
+								htmlFor="nombre"
 								className="block mb-2 text-sm font-medium text-gray-900"
 							>
-								Titulo
+								Nombre
 							</label>
 							<input
 								type="text"
-								name="title"
-								id="title"
+								name="nombre"
+								id="nombre"
 								className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0cc0df] focus:border-[#0cc0df] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0cc0df] dark:focus:border-[#0cc0df]"
-								placeholder="Titulo de la publicación"
+								placeholder="Nombre del especimen"
 								required
 							/>
 						</div>
 
 						<div className="sm:col-span-2">
 							<label
-								htmlFor="content"
+								htmlFor="scientific_name"
 								className="block mb-2 text-sm font-medium text-gray-900"
 							>
-								Contenido
+								Nombre cientifico
+							</label>
+							<input
+								type="text"
+								name="scientific_name"
+								id="scientific_name"
+								className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0cc0df] focus:border-[#0cc0df] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0cc0df] dark:focus:border-[#0cc0df]"
+								placeholder="Nombre cientifico del especimen"
+								required
+							/>
+						</div>
+
+						<div className="sm:col-span-2">
+							<label
+								htmlFor="description"
+								className="block mb-2 text-sm font-medium text-gray-900"
+							>
+								Descripcion
 							</label>
 							<textarea
-								name="content"
-								id="content"
+								name="description"
+								id="description"
 								rows={8}
 								className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-[#0cc0df] focus:border-[#0cc0df] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0cc0df] dark:focus:border-[#0cc0df]"
-								placeholder="Contenido de la publicación"
+								placeholder="Descripcion del especimen"
 								required
 							></textarea>
 						</div>
@@ -124,7 +154,7 @@ function NewForumComponent() {
 						type="submit"
 						className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-[#0cc0df] rounded-lg focus:ring-4 focus:ring-[#0cc0df] dark:focus:ring-[#0cc0df] hover:bg-[#0cc0df]"
 					>
-						Crear publicación
+						Agregar especimen
 					</button>
 				</form>
 			</div>
