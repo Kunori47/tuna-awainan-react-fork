@@ -65,9 +65,11 @@ function CommunityComponent() {
 											to={"/community/forum/$forumid"}
 											params={{ forumid: foro.id }}
 										>
-											<li className="flex flex-row bg-white shadow-md rounded-lg overflow-hidden mb-16  xl:h-64 lg:h-72 md:h-80
+											<li
+												className="flex flex-row bg-white shadow-md rounded-lg overflow-hidden mb-16  xl:h-64 lg:h-72 md:h-80
 												hover:shadow-xl  hover:border-1 hover:border-[#80808083] hover:cursor-pointer
-											">
+											"
+											>
 												{/* Imagen del artículo */}
 												<div className="w-1/2 h-full">
 													<img
@@ -92,7 +94,14 @@ function CommunityComponent() {
 													<p className="font-light text-gray-400">
 														Fecha:{" "}
 														{foro.created_at
-															? new Date(foro.created_at).toLocaleDateString()
+															? new Date(foro.created_at).toLocaleDateString(
+																	"es-ES",
+																	{
+																		day: "2-digit",
+																		month: "2-digit",
+																		year: "numeric",
+																	},
+																)
 															: "Unknown Date"}
 													</p>
 												</div>

@@ -95,9 +95,11 @@ function ExpertComponent() {
 											to={"/experto/post/$postid"}
 											params={{ postid: post.id }}
 										>
-											<li className="flex flex-row bg-white shadow-md rounded-lg overflow-hidden mb-16  xl:h-64 lg:h-72 md:h-80
+											<li
+												className="flex flex-row bg-white shadow-md rounded-lg overflow-hidden mb-16  xl:h-64 lg:h-72 md:h-80
 												hover:shadow-xl  hover:border-1 hover:border-[#80808083] hover:cursor-pointer
-											">
+											"
+											>
 												{/* Imagen del artículo */}
 												<div className="w-1/2 h-full">
 													<img
@@ -125,7 +127,14 @@ function ExpertComponent() {
 													<p className="font-light text-gray-400">
 														Fecha:{" "}
 														{post.created_at
-															? new Date(post.created_at).toLocaleDateString()
+															? new Date(post.created_at).toLocaleDateString(
+																	"es-ES",
+																	{
+																		day: "2-digit",
+																		month: "2-digit",
+																		year: "numeric",
+																	},
+																)
 															: "Unknown Date"}
 													</p>
 												</div>

@@ -26,6 +26,8 @@ import { Route as ArticlesCategoryIndexImport } from './routes/articles/category
 import { Route as AquariumLetterIndexImport } from './routes/aquarium/letter/index'
 import { Route as ExpertoPostNewImport } from './routes/experto/post/new'
 import { Route as CommunityForumNewImport } from './routes/community/forum/new'
+import { Route as ArticlesCategoryNewImport } from './routes/articles/category/new'
+import { Route as AquariumLetterNewImport } from './routes/aquarium/letter/new'
 import { Route as ExpertoPostPostidIndexImport } from './routes/experto/post/$postid/index'
 import { Route as CommunityForumForumidIndexImport } from './routes/community/forum/$forumid/index'
 import { Route as ArticlesCategoryCategoryidIndexImport } from './routes/articles/category/$categoryid/index'
@@ -123,6 +125,18 @@ const CommunityForumNewRoute = CommunityForumNewImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const ArticlesCategoryNewRoute = ArticlesCategoryNewImport.update({
+  id: '/articles/category/new',
+  path: '/articles/category/new',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AquariumLetterNewRoute = AquariumLetterNewImport.update({
+  id: '/aquarium/letter/new',
+  path: '/aquarium/letter/new',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const ExpertoPostPostidIndexRoute = ExpertoPostPostidIndexImport.update({
   id: '/experto/post/$postid/',
   path: '/experto/post/$postid/',
@@ -202,6 +216,20 @@ declare module '@tanstack/react-router' {
       path: '/novedades'
       fullPath: '/novedades'
       preLoaderRoute: typeof NovedadesIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/aquarium/letter/new': {
+      id: '/aquarium/letter/new'
+      path: '/aquarium/letter/new'
+      fullPath: '/aquarium/letter/new'
+      preLoaderRoute: typeof AquariumLetterNewImport
+      parentRoute: typeof rootRoute
+    }
+    '/articles/category/new': {
+      id: '/articles/category/new'
+      path: '/articles/category/new'
+      fullPath: '/articles/category/new'
+      preLoaderRoute: typeof ArticlesCategoryNewImport
       parentRoute: typeof rootRoute
     }
     '/community/forum/new': {
@@ -301,6 +329,8 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutIndexRoute
   '/aquarium': typeof AquariumIndexRoute
   '/novedades': typeof NovedadesIndexRoute
+  '/aquarium/letter/new': typeof AquariumLetterNewRoute
+  '/articles/category/new': typeof ArticlesCategoryNewRoute
   '/community/forum/new': typeof CommunityForumNewRoute
   '/experto/post/new': typeof ExpertoPostNewRoute
   '/aquarium/letter': typeof AquariumLetterIndexRoute
@@ -323,6 +353,8 @@ export interface FileRoutesByTo {
   '/about': typeof AboutIndexRoute
   '/aquarium': typeof AquariumIndexRoute
   '/novedades': typeof NovedadesIndexRoute
+  '/aquarium/letter/new': typeof AquariumLetterNewRoute
+  '/articles/category/new': typeof ArticlesCategoryNewRoute
   '/community/forum/new': typeof CommunityForumNewRoute
   '/experto/post/new': typeof ExpertoPostNewRoute
   '/aquarium/letter': typeof AquariumLetterIndexRoute
@@ -346,6 +378,8 @@ export interface FileRoutesById {
   '/about/': typeof AboutIndexRoute
   '/aquarium/': typeof AquariumIndexRoute
   '/novedades/': typeof NovedadesIndexRoute
+  '/aquarium/letter/new': typeof AquariumLetterNewRoute
+  '/articles/category/new': typeof ArticlesCategoryNewRoute
   '/community/forum/new': typeof CommunityForumNewRoute
   '/experto/post/new': typeof ExpertoPostNewRoute
   '/aquarium/letter/': typeof AquariumLetterIndexRoute
@@ -370,6 +404,8 @@ export interface FileRouteTypes {
     | '/about'
     | '/aquarium'
     | '/novedades'
+    | '/aquarium/letter/new'
+    | '/articles/category/new'
     | '/community/forum/new'
     | '/experto/post/new'
     | '/aquarium/letter'
@@ -391,6 +427,8 @@ export interface FileRouteTypes {
     | '/about'
     | '/aquarium'
     | '/novedades'
+    | '/aquarium/letter/new'
+    | '/articles/category/new'
     | '/community/forum/new'
     | '/experto/post/new'
     | '/aquarium/letter'
@@ -412,6 +450,8 @@ export interface FileRouteTypes {
     | '/about/'
     | '/aquarium/'
     | '/novedades/'
+    | '/aquarium/letter/new'
+    | '/articles/category/new'
     | '/community/forum/new'
     | '/experto/post/new'
     | '/aquarium/letter/'
@@ -435,6 +475,8 @@ export interface RootRouteChildren {
   AboutIndexRoute: typeof AboutIndexRoute
   AquariumIndexRoute: typeof AquariumIndexRoute
   NovedadesIndexRoute: typeof NovedadesIndexRoute
+  AquariumLetterNewRoute: typeof AquariumLetterNewRoute
+  ArticlesCategoryNewRoute: typeof ArticlesCategoryNewRoute
   CommunityForumNewRoute: typeof CommunityForumNewRoute
   ExpertoPostNewRoute: typeof ExpertoPostNewRoute
   AquariumLetterIndexRoute: typeof AquariumLetterIndexRoute
@@ -457,6 +499,8 @@ const rootRouteChildren: RootRouteChildren = {
   AboutIndexRoute: AboutIndexRoute,
   AquariumIndexRoute: AquariumIndexRoute,
   NovedadesIndexRoute: NovedadesIndexRoute,
+  AquariumLetterNewRoute: AquariumLetterNewRoute,
+  ArticlesCategoryNewRoute: ArticlesCategoryNewRoute,
   CommunityForumNewRoute: CommunityForumNewRoute,
   ExpertoPostNewRoute: ExpertoPostNewRoute,
   AquariumLetterIndexRoute: AquariumLetterIndexRoute,
@@ -488,6 +532,8 @@ export const routeTree = rootRoute
         "/about/",
         "/aquarium/",
         "/novedades/",
+        "/aquarium/letter/new",
+        "/articles/category/new",
         "/community/forum/new",
         "/experto/post/new",
         "/aquarium/letter/",
@@ -522,6 +568,12 @@ export const routeTree = rootRoute
     },
     "/novedades/": {
       "filePath": "novedades/index.tsx"
+    },
+    "/aquarium/letter/new": {
+      "filePath": "aquarium/letter/new.tsx"
+    },
+    "/articles/category/new": {
+      "filePath": "articles/category/new.tsx"
     },
     "/community/forum/new": {
       "filePath": "community/forum/new.tsx"
