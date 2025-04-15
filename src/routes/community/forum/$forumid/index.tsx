@@ -3,11 +3,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabase";
 import { getProfileId, getSession } from "@/services/auth";
-import {
-	fetchforumComments,
-	postComment,
-	postforumComment,
-} from "@/services/comments";
+import { fetchComments, postComment } from "@/services/comments";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import Map from "@/components/map/mapforum";
@@ -45,7 +41,7 @@ function ForumComponent() {
 	});
 	const { data: comments } = useQuery({
 		queryKey: ["ComentariosForos", forumid],
-		queryFn: () => fetchforumComments(forumid),
+		queryFn: () => fetchComments(forumid),
 	});
 
 	const { data: session } = useQuery({
@@ -63,7 +59,7 @@ function ForumComponent() {
 	const mutation = useMutation({
 		mutationFn: async (newComment) => {
 			const position = queryClient.getQueryData(["position"]);
-			await postforumComment(forumid, newComment, id_user, position);
+			await postComment(forumid, newComment, id_user, position);
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["comments", forumid] });
@@ -91,10 +87,14 @@ function ForumComponent() {
 		<div>
 			<div className="mx-8 my-2 font-light text-gray-400">
 				<p>Autor: {forums.profiles.username}</p>
-				<p>
+				<p className="font-light text-gray-400">
 					Fecha:{" "}
 					{forums.created_at
-						? new Date(forums.created_at).toLocaleDateString()
+						? new Date(forums.created_at).toLocaleDateString("es-ES", {
+								day: "2-digit",
+								month: "2-digit",
+								year: "numeric",
+							})
 						: "Unknown Date"}
 				</p>
 			</div>
