@@ -71,14 +71,25 @@ function ForumComponent() {
 		if (!session) {
 			toast({
 				title: "Error",
-				description: "Debes estar registrado para poder comentar",
+				description: "Debes iniciar sesión para comentar",
 			});
+			//return;
 		}
 		const formData = new FormData(e.target);
 		const content = formData.get("content");
 		mutation.mutate(content);
 		e.target.reset();
 	};
+
+	const handleReply = async (content: string, commentId: string) => {
+	if (!session) {
+		toast({
+		title: "Error",
+		description: "Debes iniciar sesión para responder",
+		});
+		return;
+	}
+	};	
 
 	if (isLoading) return <div>Loading...</div>;
 	if (error) return <div>Error: {error.message}</div>;
@@ -142,13 +153,16 @@ function ForumComponent() {
 				<div className="comments-section">
 					<h3 className="mb-4">Comentarios</h3>
 					<div className="grid grid-cols-1 gap-2">
-						{comments?.map((comments) => (
-							<CommentItem
-								username={comments.profiles.username}
-								created_at={comments.created_at}
-								text={comments.content}
-							></CommentItem>
-						))}
+					{comments?.map((comment) => (
+						<CommentItem
+						key={comment.id}
+						commentId={comment.id}
+						username={comment.profiles.username}
+						created_at={comment.created_at}
+						text={comment.content}
+						onReply={handleReply}
+						/>
+					))}
 					</div>
 				</div>
 			</div>

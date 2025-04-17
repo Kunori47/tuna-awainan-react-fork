@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 
 
 interface ReplyBoxProps {
-  parentId: string;
   onSubmit: (content: string) => void;
   onCancel: () => void;
 }
@@ -20,7 +19,7 @@ export const ReplyBox: React.FC<ReplyBoxProps> = ({ onSubmit, onCancel }) => {
   };
 
   return (
-    <form className="ml-8 mt-4" onSubmit={handleSubmit}>
+    <form className="ml-3 mt-6" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-2">
         <textarea
           value={content}
@@ -38,6 +37,7 @@ export const ReplyBox: React.FC<ReplyBoxProps> = ({ onSubmit, onCancel }) => {
           >
             Cancelar
           </Button>
+
           <Button
             type="submit"
             className="bg-[#0cc0df] hover:bg-[#087b9b] text-white text-xs" 
