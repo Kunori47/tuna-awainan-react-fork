@@ -32,7 +32,7 @@ export const ReplyBox: React.FC<ReplyBoxProps> = ({ onSubmit, onCancel, commentI
   };
 
   return (
-    <form className="ml-8 mt-4" onSubmit={handleSubmit}>
+    <form className="ml-3 mt-6" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-2">
         <textarea
           name="content"
@@ -51,6 +51,7 @@ export const ReplyBox: React.FC<ReplyBoxProps> = ({ onSubmit, onCancel, commentI
           >
             Cancelar
           </Button>
+
           <Button
             type="submit"
             className="bg-[#0cc0df] hover:bg-[#087b9b] text-white text-xs" 

@@ -74,14 +74,25 @@ function ForumComponent() {
 		if (!session) {
 			toast({
 				title: "Error",
-				description: "Debes estar registrado para poder comentar",
+				description: "Debes iniciar sesión para comentar",
 			});
+			//return;
 		}
 		const formData = new FormData(e.target);
 		const content = formData.get("content");
 		mutation.mutate(content);
 		e.target.reset();
 	};
+
+	const handleReply = async (content: string, commentId: string) => {
+	if (!session) {
+		toast({
+		title: "Error",
+		description: "Debes iniciar sesión para responder",
+		});
+		return;
+	}
+	};	
 
 	if (isLoading) return <div>Loading...</div>;
 	if (error) return <div>Error: {error.message}</div>;

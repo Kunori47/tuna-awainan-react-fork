@@ -6,6 +6,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useToast } from "@/hooks/use-toast";
 
+
 export const Route = createFileRoute("/community/forum/new")({
 	component: NewForumComponent,
 });
