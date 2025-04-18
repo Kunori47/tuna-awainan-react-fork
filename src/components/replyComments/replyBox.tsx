@@ -19,16 +19,18 @@ export const ReplyBox: React.FC<ReplyBoxProps> = ({ onSubmit, onCancel, commentI
       await ReplyComment(commentId, content, userid);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["ComentariosForos"] });
+      queryClient.invalidateQueries({ queryKey: ["answers", commentId] });
     },
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.currentTarget);
     const content = formData.get("content");
-    mutation.mutate(content);
-    e.target.reset();
+    if (typeof content === "string") {
+      mutation.mutate(content);
+      e.currentTarget.reset();
+    }
   };
 
   return (

@@ -59,7 +59,11 @@ export const AnswerSection: React.FC<AnswerSectionProps> = ({
                       {answer.profiles.username}
                     </p>
                     <p className="text-xs text-gray-500">
-                      {new Date(answer.created_at).toLocaleDateString("es-ES")}
+                    {new Date(answer.created_at).toLocaleDateString("es-ES", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric",
+                      })}
                     </p>
                   </div>
                 </div>

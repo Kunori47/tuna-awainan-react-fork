@@ -1,4 +1,3 @@
-import React from 'react'
 import CommentItem from "@/components/CommentItem";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
@@ -31,7 +30,6 @@ const fetchForumById = async (forumid) => {
 function ForumComponent() {
 	const { forumid } = Route.useParams();
 	const queryClient = useQueryClient();
-	const [intervalMs, setIntervalMs] = React.useState(1000)
 
 	const {
 		data: forums,
@@ -44,7 +42,6 @@ function ForumComponent() {
 	const { data: comments } = useQuery({
 		queryKey: ["ComentariosForos", forumid],
 		queryFn: () => fetchComments(forumid),
-		refetchInterval: intervalMs,
 	});
 
 	const { data: session } = useQuery({
@@ -57,17 +54,15 @@ function ForumComponent() {
 		queryFn: () => getProfileId(session?.user.id),
 	});
 
-	console.log(id_user);
-
-	const mutation = useMutation({
-		mutationFn: async (newComment) => {
-			const position = queryClient.getQueryData(["position"]);
-			await postComment(forumid, newComment, id_user, position);
-		},
-		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ["comments", forumid] });
-		},
-	});
+		const mutation = useMutation({
+			mutationFn: async (newComment) => {
+				const position = queryClient.getQueryData(["position"]);
+				await postComment(forumid, newComment, id_user, position);
+			},
+			onSuccess: () => {
+				queryClient.invalidateQueries({ queryKey: ["ComentariosForos", forumid] });
+			},
+		});
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

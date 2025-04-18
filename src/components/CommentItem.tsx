@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { ReplyBox } from "@/components/replyComments/replyBox";
 import { AnswerSection } from "@/components/replyComments/replySection";
+import { supabase } from "@/lib/supabase";
 
 interface Props {
 	username: string;
@@ -11,30 +13,28 @@ interface Props {
 	
 }
 
+const fetchAnswers = async (commentId: number) => {
+	const { data, error } = await supabase
+		.from("answerpost")
+		.select("*, profiles(username)")
+		.eq("id_comment", commentId);
+
+	if (error) {
+		throw new Error(error.message);
+	}
+
+	return data;
+}
+
 const CommentItem: React.FC<Props> = ({ username, created_at, text, commentId, userid}) => {
 		
 	const [showReplyBox, setShowReplyBox] = useState(false);
 	const [showAnswers, setShowAnswers] = useState(false);
 
-  // Datos estaticos de ejemplo
-  const staticAnswers = [
-    {
-      id: "static-answer-1",
-      content: "Esta es una respuesta estática de ejemplo.",
-      created_at: new Date().toISOString(),
-      profiles: {
-        username: "UsuarioEjemplo",
-      },
-    },
-    {
-      id: "static-answer-2",
-      content: "Otra respuesta de ejemplo.",
-      created_at: new Date(Date.now() - 86400000).toISOString(),
-      profiles: {
-        username: "OtroUsuario",
-      },
-    },
-  ];
+	const { data: staticAnswers } = useQuery({
+		queryKey: ["answers", commentId],
+		queryFn: () => fetchAnswers(commentId),
+	});
 
   const handleReplySubmit = (content: string) => {
    	setShowReplyBox(false);
@@ -72,9 +72,9 @@ const CommentItem: React.FC<Props> = ({ username, created_at, text, commentId, u
 		</div>
 
 		{/* render las respuestas y los botones de acccion */}
-		{staticAnswers.length > 0 && (
+		{(staticAnswers ?? []).length >= 0 && (
 			<AnswerSection
-				answers={staticAnswers}
+				answers={staticAnswers ?? []}
 				showAnswers={showAnswers}
 				onToggle={() => setShowAnswers(!showAnswers)}
 				onReply={() => setShowReplyBox(!showReplyBox)} 
@@ -84,6 +84,8 @@ const CommentItem: React.FC<Props> = ({ username, created_at, text, commentId, u
 		{/*render del form para respuestas  */}
 		{showReplyBox && (
 			<ReplyBox
+			userid={userid}
+			commentId={commentId}
 			onSubmit={handleReplySubmit}
 			onCancel={() => setShowReplyBox(false)}
 			/>

@@ -111,7 +111,7 @@ function PostComponent() {
 
 				<p className="text-gray-700 leading-relaxed">{posts.content}</p>
 				<hr />
-				<Map postid={postid}></Map>
+				<Map forumid={postid}></Map>
 				<form
 					className="mb-6 flex flex-col w-full mt-5"
 					onSubmit={handleSubmit}
