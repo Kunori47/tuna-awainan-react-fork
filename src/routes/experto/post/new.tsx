@@ -81,7 +81,7 @@ function NewPostingComponent() {
 								htmlFor="title"
 								className="block mb-2 text-sm font-medium text-gray-900"
 							>
-								Titulo
+								Título
 							</label>
 							<input
 								type="text"
