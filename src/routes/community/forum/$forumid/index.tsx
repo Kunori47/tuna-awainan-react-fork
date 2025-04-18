@@ -1,3 +1,4 @@
+import React from 'react'
 import CommentItem from "@/components/CommentItem";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
@@ -30,6 +31,7 @@ const fetchForumById = async (forumid) => {
 function ForumComponent() {
 	const { forumid } = Route.useParams();
 	const queryClient = useQueryClient();
+	const [intervalMs, setIntervalMs] = React.useState(1000)
 
 	const {
 		data: forums,
@@ -42,6 +44,7 @@ function ForumComponent() {
 	const { data: comments } = useQuery({
 		queryKey: ["ComentariosForos", forumid],
 		queryFn: () => fetchComments(forumid),
+		refetchInterval: intervalMs,
 	});
 
 	const { data: session } = useQuery({
@@ -147,6 +150,8 @@ function ForumComponent() {
 								username={comments.profiles.username}
 								created_at={comments.created_at}
 								text={comments.content}
+								commentId={comments.id}
+								userid={id_user}
 							></CommentItem>
 						))}
 					</div>

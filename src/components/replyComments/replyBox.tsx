@@ -1,33 +1,46 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { ReplyComment } from "@/services/comments";
 
 
 interface ReplyBoxProps {
-  parentId: string;
   onSubmit: (content: string) => void;
   onCancel: () => void;
+  commentId: number;
+	userid: number;
 }
 
-export const ReplyBox: React.FC<ReplyBoxProps> = ({ onSubmit, onCancel }) => {
-  const [content, setContent] = React.useState("");
+export const ReplyBox: React.FC<ReplyBoxProps> = ({ onSubmit, onCancel, commentId, userid }) => {
+  const queryClient = useQueryClient();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const mutation = useMutation({
+    mutationFn: async (content: string) => {
+      await ReplyComment(commentId, content, userid);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["ComentariosForos"] });
+    },
+  });
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (content.trim()) {
-      onSubmit(content);
-      setContent("");
-    }
+    const formData = new FormData(e.target);
+    const content = formData.get("content");
+    mutation.mutate(content);
+    e.target.reset();
   };
 
   return (
     <form className="ml-8 mt-4" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-2">
         <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
+          name="content"
+          id="content"
           rows={3}
           className="w-full p-2 text-sm border rounded-lg focus:border-none bg-white"
           placeholder="Escribe tu respuesta..."
+          required
         />
         <div className="flex gap-2 justify-end ">
           <Button

@@ -145,6 +145,8 @@ function PostComponent() {
 								username={comments.profiles.username}
 								created_at={comments.created_at}
 								text={comments.content}
+								commentId={comments.id}
+								userid={id_user}
 							></CommentItem>
 						))}
 					</div>

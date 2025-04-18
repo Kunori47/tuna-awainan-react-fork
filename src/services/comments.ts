@@ -28,3 +28,17 @@ export const fetchComments = async (postId) => {
 
 	return data;
 };
+
+export const ReplyComment = async (commentId, content, userId) => {
+	const { data, error } = await supabase.from("answerpost").insert([
+		{
+			id_comment: commentId,
+			content,
+			id_user: userId,
+		},
+	]);
+	if (error) {
+		console.error(error);
+	}
+	return data;
+}

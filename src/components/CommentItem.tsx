@@ -5,16 +5,16 @@ interface Props {
 	username: string;
 	created_at: string;
 	text: string;
-	commentId: string;
-	onReply: (content: string, parentId: string) => void;	
+	commentId: number;
+	userid: number;
+	
 }
 
-const CommentItem: React.FC<Props> = ({ username, created_at, text, commentId,onReply }) => {
+const CommentItem: React.FC<Props> = ({ username, created_at, text, commentId, userid}) => {
 		
 	const [showReplyBox, setShowReplyBox] = useState(false);
 
 	const handleReplySubmit = (content: string) => {
-	onReply(content, commentId);
 	setShowReplyBox(false);
 	};
 
@@ -62,7 +62,8 @@ const CommentItem: React.FC<Props> = ({ username, created_at, text, commentId,on
 
 			{showReplyBox && (
 				<ReplyBox
-				parentId={commentId}
+				userid={userid}
+				commentId={commentId}
 				onSubmit={handleReplySubmit}
 				onCancel={() => setShowReplyBox(false)}
 				/>
