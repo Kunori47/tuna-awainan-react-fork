@@ -75,7 +75,7 @@ function RouteComponent() {
 				<Link to={"/articles/category"}>Atrás</Link>
 			</Button>
 
-			<div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+			<div className="py-8 px-4 mx-auto max-w-2xl lg:pt-1 lg:pb-16">
 				<h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
 					Añadir nueva publicación
 				</h2>
@@ -86,14 +86,14 @@ function RouteComponent() {
 								htmlFor="title"
 								className="block mb-2 text-sm font-medium text-gray-900"
 							>
-								Titulo
+								Título
 							</label>
 							<input
 								type="text"
 								name="title"
 								id="title"
 								className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0cc0df] focus:border-[#0cc0df] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0cc0df] dark:focus:border-[#0cc0df]"
-								placeholder="Titulo de la publicación"
+								placeholder="Título de la publicación"
 								required
 							/>
 						</div>
@@ -137,9 +137,9 @@ function RouteComponent() {
 								htmlFor="category"
 								className="block mb-2 text-sm font-medium text-gray-900"
 							>
-								Categoria
+								Categoría
 							</label>
-							<select name="category" id="category">
+							<select name="category" id="category" className="bg-gray-50 text-sm">
 								{category &&
 									category.map((category) => (
 										<option value={category.id}>{category.name}</option>
@@ -154,12 +154,12 @@ function RouteComponent() {
 							>
 								Imagen
 							</label>
-							<input type="file" name="image" id="image" accept="articles/*" />
+							<input type="file" name="image" id="image" accept="articles/*"  className="text-sm text-black" />
 						</div>
 					</div>
 					<button
 						type="submit"
-						className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-[#0cc0df] rounded-lg focus:ring-4 focus:ring-[#0cc0df] dark:focus:ring-[#0cc0df] hover:bg-[#0cc0df]"
+						className="hover:bg-[#087b9b] inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-[#0cc0df] rounded-lg focus:ring-4 focus:ring-[#0cc0df] dark:focus:ring-[#0cc0df]"
 					>
 						Crear publicación
 					</button>
