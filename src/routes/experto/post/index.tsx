@@ -100,7 +100,7 @@ function ExpertComponent() {
                     <div className="card">
                         <ul className="grid grid-cols-1 gap-8">
                         {posts &&
-                            posts.slice(0, 2).map((post) => (
+                            posts.map((post) => (
                             <Link 
                                 key={post.id}
                                 to={'/experto/post/$postid'} 
