@@ -96,9 +96,11 @@ const Map: React.FC<Props> = ({ category, forums }) => {
                             color='red'>
 
                             <Popup>
-                                <h2>
-                                    {forum.title}
-                                </h2>
+                                <a href={`../${forum.id}`}>
+                                    <h2>
+                                        {forum.title}
+                                    </h2>
+                                </a>
                             </Popup>
                         
                         </Circle>
