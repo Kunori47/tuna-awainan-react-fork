@@ -10,14 +10,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 
 interface Props {
-	forumid;
+	forumid:number;
 }
 
 const fetchInitialPosition = async () => {
 	return { lat: 37.7749, lng: -122.4194 };
 };
 
-const fetchPosition = async (forumid) => {
+const fetchPosition = async (forumid:number) => {
 	const { data, error } = await supabase
 		.from("commentpost")
 		.select("longitud, latitud, profiles(username)")
@@ -29,7 +29,7 @@ const fetchPosition = async (forumid) => {
 	return data;
 };
 
-const updatePosition = async (position) => {
+const updatePosition = async (position: number) => {
 	return position;
 };
 
