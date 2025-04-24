@@ -68,12 +68,18 @@ function ExpertComponent() {
 				<div className="font-custom max-w-screen-lg mx-auto gap-8 lg:px-[6rem] md:px-[6rem]">
 					<div className="flex flex-col gap-4">
 						<header>
-							<h2 className="text-3xl font-bold text-center my-8 mb-2">
+							<h2 className="text-5xl font-bold text-center my-8 mb-2">
 								Hablando con Expertos
 							</h2>
 							<p className="text-base text-gray-700 dark:text-gray-400">
 								Foros publicados: {posts?.length}
 							</p>
+							<Link to={'/experto/post/map/mapPost'} >
+								<div className='absolute right-10 top-6 shadow-lg rounded-full bg-white size-[70px] hover:bg-slate-50'>
+									
+								</div>		
+							</Link>
+							
 						</header>
 						{session_user === "specialist" || session_user === "admin" ? (
 							<Button className="w-1/6 hover:bg-[#087b9b] min-w-fit">
