@@ -81,7 +81,6 @@ const Map: React.FC<Props> = ({ category, forums }) => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-<<<<<<< HEAD
             <LocationMarker></LocationMarker>
             {
                 //all forums 
@@ -92,12 +91,6 @@ const Map: React.FC<Props> = ({ category, forums }) => {
                             key={1} 
                             radius={forum.ratio } 
                             color='red'>
-=======
-        <LocationMarker></LocationMarker>
-        {
-          //get all post and show them in the map
-          
->>>>>>> 0864381 (add mark to view the position)
 
                             <Popup>
                                 <h2>
@@ -106,10 +99,7 @@ const Map: React.FC<Props> = ({ category, forums }) => {
                             </Popup>
                         
                         </Circle>
-                ))
-
-            
-                
+                ))           
             }  
         </MapContainer>
         
