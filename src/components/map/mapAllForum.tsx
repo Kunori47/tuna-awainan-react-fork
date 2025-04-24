@@ -17,8 +17,8 @@ export type Forun = {
     }
 }
 interface Props{
-    category: string,
-    forums: Forun[]
+    category: string
+    forums: any[]
 }
 
 const fetchInitialPosition = async () => {
@@ -37,7 +37,6 @@ const fetchPosition = async (category: string) =>{
         console.error(error);
     }
 
-    console.log(data)
     return data;
 }
 
@@ -82,26 +81,43 @@ function LocationMarker(){
 
 }
 
-const Map: React.FC<Props> = ({ category , forums}) => {
+const Map: React.FC<Props> = ({ category, forums }) => {
     
     const { data: location , isLoading, error } = useQuery({
         queryKey: ['location'],
         queryFn: () => fetchPosition(category),
     });
 
-
+    const valide = forums.filter((forum) => forum.latitud !== null && forum.longitud !== null && forum.ratio !== null);
+    console.log(valide)
     return (
         <MapContainer center={[8.296963, -62.711613]} zoom={13} style={{ width: '1175px', height: '550px' }} className='w-full h-full'>
         <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <LocationMarker></LocationMarker>
-        {
-          //get all post and show them in the map
-          
+            <LocationMarker></LocationMarker>
+            {
+                //all forums 
+                valide?.map((forum) =>(
+                   
+                    <Circle 
+                            center={[forum.latitud, forum.longitud]} 
+                            key={1} 
+                            radius={forum.ratio } 
+                            color='red'>
 
-        }   
+                            <Popup>
+                                <a href={`../${forum.id}`}>
+                                    <h2>
+                                        {forum.title}
+                                    </h2>
+                                </a>
+                            </Popup>
+                        
+                        </Circle>
+                ))           
+            }  
         </MapContainer>
         
     )
