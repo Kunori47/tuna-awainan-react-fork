@@ -99,15 +99,7 @@ const Map: React.FC<Props> = ({ category , forums}) => {
         <LocationMarker></LocationMarker>
         {
           //get all post and show them in the map
-          forums.map((forum: Forun) => (
-            <Marker key={forum.id} position={[forum.latitud, forum.longitud]}>
-                <Popup>
-                    <div className='flex flex-col'>
-                        <h2 className='text-lg font-bold'>{forum.title}</h2>
-                    </div>
-                </Popup>
-            </Marker>
-          ))
+          
 
         }   
         </MapContainer>
