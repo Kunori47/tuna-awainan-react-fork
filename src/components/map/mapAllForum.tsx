@@ -3,9 +3,22 @@ import 'leaflet/dist/leaflet.css';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/lib/supabase';
 
-
+export type Forun = {
+    id: number,
+    title: string,
+    description: string,
+    category: string,
+    latitud: number,
+    longitud: number,
+    ratio: number,
+    profiles:{
+        username: string
+        user_id: number
+    }
+}
 interface Props{
-    category: string
+    category: string,
+    forums: Forun[]
 }
 
 const fetchInitialPosition = async () => {
@@ -40,18 +53,18 @@ function LocationMarker(){
         queryFn: fetchInitialPosition,
       });
 
-      const mutation = useMutation({
+    const mutation = useMutation({
         mutationFn: updatePosition,
         onSuccess: (newPosition) => {
-          queryClient.setQueryData(['position'], newPosition);
+            queryClient.setQueryData(['position'], newPosition);
         },
-      });
+    });
     
-      useMapEvents({
+    useMapEvents({
         click(e) {
-          mutation.mutate(e.latlng);
+            mutation.mutate(e.latlng);
         },
-      });
+    });
       
     const position = queryClient.getQueryData(['position']) || initialPosition;
 
@@ -61,12 +74,15 @@ function LocationMarker(){
 
     return (
         <Marker position={[position.lat, position.lng]}>
+            <Popup>
+                <span>Estoy aquí: {position.lat} y {position.lng}</span>
+            </Popup>
         </Marker>
     );
 
 }
 
-const Map: React.FC<Props> = ({ category }) => {
+const Map: React.FC<Props> = ({ category , forums}) => {
     
     const { data: location , isLoading, error } = useQuery({
         queryKey: ['location'],
@@ -82,16 +98,18 @@ const Map: React.FC<Props> = ({ category }) => {
         />
         <LocationMarker></LocationMarker>
         {
-          //location && location.map((marker, index) => (
-            <Circle  center={[8.296963, -62.711613]} key={1} radius={120} color='red'>
+          //get all post and show them in the map
+          forums.map((forum: Forun) => (
+            <Marker key={forum.id} position={[forum.latitud, forum.longitud]}>
                 <Popup>
-                    <h2>
-                        En la ucab no hay agua
-                    </h2>
+                    <div className='flex flex-col'>
+                        <h2 className='text-lg font-bold'>{forum.title}</h2>
+                    </div>
                 </Popup>
-            </Circle>
-            
-          }   
+            </Marker>
+          ))
+
+        }   
         </MapContainer>
         
     )
