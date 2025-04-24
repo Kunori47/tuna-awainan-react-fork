@@ -6,6 +6,7 @@ import { supabase } from '@/lib/supabase';
 
 interface Props{
     category: string
+    forums: any[]
 }
 
 const fetchInitialPosition = async () => {
@@ -24,7 +25,6 @@ const fetchPosition = async (category: string) =>{
         console.error(error);
     }
 
-    console.log(data)
     return data;
 }
 
@@ -66,32 +66,44 @@ function LocationMarker(){
 
 }
 
-const Map: React.FC<Props> = ({ category }) => {
+const Map: React.FC<Props> = ({ category, forums }) => {
     
     const { data: location , isLoading, error } = useQuery({
         queryKey: ['location'],
         queryFn: () => fetchPosition(category),
     });
 
-
+    const valide = forums.filter((forum) => forum.latitud !== null && forum.longitud !== null && forum.ratio !== null);
+    console.log(valide)
     return (
         <MapContainer center={[8.296963, -62.711613]} zoom={13} style={{ width: '1175px', height: '550px' }} className='w-full h-full'>
         <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <LocationMarker></LocationMarker>
-        {
-          //location && location.map((marker, index) => (
-            <Circle  center={[8.296963, -62.711613]} key={1} radius={120} color='red'>
-                <Popup>
-                    <h2>
-                        En la ucab no hay agua
-                    </h2>
-                </Popup>
-            </Circle>
+            <LocationMarker></LocationMarker>
+            {
+                //all forums 
+                valide?.map((forum) =>(
+                   
+                    <Circle 
+                            center={[forum.latitud, forum.longitud]} 
+                            key={1} 
+                            radius={forum.ratio } 
+                            color='red'>
+
+                            <Popup>
+                                <h2>
+                                    {forum.title}
+                                </h2>
+                            </Popup>
+                        
+                        </Circle>
+                ))
+
             
-          }   
+                
+            }  
         </MapContainer>
         
     )

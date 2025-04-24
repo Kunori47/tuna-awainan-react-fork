@@ -27,6 +27,7 @@ function RouteComponent() {
         queryFn: fetchPost,
     });
     
+    
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -35,9 +36,6 @@ function RouteComponent() {
     if (error) {    
         return <div>Error: {error.message}</div>;
     }
-
-    console.log(forums)
-
 
 
   return (<>
