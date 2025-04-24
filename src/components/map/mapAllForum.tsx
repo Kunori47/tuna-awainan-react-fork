@@ -61,6 +61,9 @@ function LocationMarker(){
 
     return (
         <Marker position={[position.lat, position.lng]}>
+            <Popup>
+                <span>Estoy aquí: {position.lat} y {position.lng}</span>
+            </Popup>
         </Marker>
     );
 
