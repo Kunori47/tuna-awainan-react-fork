@@ -37,6 +37,7 @@ function RouteComponent() {
         return <div>Error: {error.message}</div>;
     }
 
+    console.log(forums);
 
   return (<>
 
@@ -52,9 +53,6 @@ function RouteComponent() {
                       
                         </div>
                     </Link>
-                  
-                  
-                  
                 </div>
             </div>
 
