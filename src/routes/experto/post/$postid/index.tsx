@@ -111,7 +111,7 @@ function PostComponent() {
 
 				<p className="text-gray-700 leading-relaxed">{posts.content}</p>
 				<hr />
-				<Map forumid={postid}></Map>
+				<Map forumid={posts.id} zone={{lat: posts.latitud, lng: posts.longitud, ratio: posts.ratio}}></Map>
 				<form
 					className="mb-6 flex flex-col w-full mt-5"
 					onSubmit={handleSubmit}
