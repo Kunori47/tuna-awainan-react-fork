@@ -74,7 +74,10 @@ function LocationMarker(){
     return (
         <Marker position={[position.lat, position.lng]}>
             <Popup>
-                <span>Estoy aquí: {position.lat} y {position.lng}</span>
+                <span className='text-center'>
+                    Estoy aquí: {position.lat} y {position.lng}
+                </span>
+                
             </Popup>
         </Marker>
     );
@@ -107,11 +110,15 @@ const Map: React.FC<Props> = ({ category, forums }) => {
                             radius={forum.ratio } 
                             color='red'>
 
-                            <Popup>
+                            <Popup >
                                 <a href={`../${forum.id}`}>
-                                    <h2>
-                                        {forum.title}
-                                    </h2>
+                                    <div className='pl-1'>
+                                        <img src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/posts/${forum.img}`} alt="" className='w-full h-32 object-cover rounded-lg mb-2' />
+                                        <h2 className='text-center text-xl text-[#0cc0df]'>
+                                            {forum.title}
+                                        </h2>
+                                    </div>
+                                    
                                 </a>
                             </Popup>
                         
