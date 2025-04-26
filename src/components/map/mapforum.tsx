@@ -3,14 +3,21 @@ import {
 	Marker,
 	Popup,
 	TileLayer,
+	Circle,
 	useMapEvents,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 
+type Zone = {
+	lat: number;
+	lng: number;
+	ratio: number;
+}
 interface Props {
-	forumid:number;
+	forumid:number
+	zone?: Zone
 }
 
 const fetchInitialPosition = async () => {
@@ -20,7 +27,7 @@ const fetchInitialPosition = async () => {
 const fetchPosition = async (forumid:number) => {
 	const { data, error } = await supabase
 		.from("commentpost")
-		.select("longitud, latitud, profiles(username)")
+		.select("longitud, latitud,content, profiles(username)")
 		.eq("id_post", forumid);
 
 	if (error) {
@@ -66,33 +73,44 @@ function LocationMarker() {
 	return <Marker position={[position.lat, position.lng]}></Marker>;
 }
 
-const Map: React.FC<Props> = ({ forumid }) => {
+const Map: React.FC<Props> = ({ forumid:forumId, zone: _zone }) => {
 	const {
 		data: location,
 		isLoading,
 		error,
 	} = useQuery({
 		queryKey: ["location"],
-		queryFn: () => fetchPosition(forumid),
+		queryFn: () => fetchPosition(forumId),
 	});
 
 	return (
 		<MapContainer
 			center={[8.296963, -62.711613]}
 			zoom={13}
-			style={{ width: "600px", height: "400px" }}
-			className="mt-4 mx-auto"
+			style={{ width: "800px", height: "400px" }}
+			className="mt-4 mx-auto w-full px-[40px]"
 		>
 			<TileLayer
 				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 			/>
 			<LocationMarker></LocationMarker>
+			{
+				_zone?.lat && _zone.lng && _zone.ratio &&
+				  <Circle 
+											center={[_zone.lat, _zone.lng]} 
+											key={1} 
+											radius={_zone.ratio} 
+											color='red'>
+				 </Circle>
+
+			}
 			{location &&
 				location.map((marker, index) => (
 					<Marker position={[marker.latitud, marker.longitud]} key={index}>
 						<Popup>
-							<h2>{marker.profiles.username}</h2>
+							<p className="text-[16px]">{marker.content}</p>
+							<h2 className='italic'>Atte: {marker.profiles.username}</h2>
 						</Popup>
 					</Marker>
 				))}
