@@ -83,12 +83,12 @@ function ExpertComponent() {
 						</header>
 						{session_user === "specialist" || session_user === "admin" ? (
 							<Button className="w-1/6 hover:bg-[#087b9b] min-w-fit">
-								<Link to={"/experto/post/new"}>Crear un nuevo post</Link>
+								<Link to={"/experto/post/new"}>Crear un nuevo foro</Link>
 							</Button>
 						) : (
 							<Button className="w-1/6 hover:bg-[#087b9b]">
 								<a href="mailto:grupotunawainan@gmail.com?subject=Solicitud para crear posts&body=Coloque su usuario y escriba la razón del porqué quiere crear un post en la página.">
-									Solicitud para crear posts
+									Solicitud para crear un foro
 								</a>
 							</Button>
 						)}
@@ -110,7 +110,7 @@ function ExpertComponent() {
 												<div className="w-1/2 h-full">
 													<img
 														className="object-cover w-full h-full"
-														src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${post.img}`}
+														src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/posts/${post.img}`}
 														alt={post.title}
 													/>
 												</div>
