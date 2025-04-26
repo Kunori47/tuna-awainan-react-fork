@@ -102,7 +102,7 @@ function PostComponent() {
 
 			<div className="max-w-4xl mx-auto p-6 bg-white rounded-xl mb-8">
 				<img
-					src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${posts.img}`}
+					src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/posts/${posts.img}`}
 					alt=""
 					className="w-full h-64 object-cover rounded-lg mb-6"
 				/>
