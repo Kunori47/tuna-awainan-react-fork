@@ -10,14 +10,20 @@ import "leaflet/dist/leaflet.css";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 
-type Zone = {
+
+type Center = {
 	lat: number;
 	lng: number;
+}
+
+type Zone = Center & {
 	ratio: number;
 }
+
 interface Props {
 	forumid:number
 	zone?: Zone
+	center?: Center
 }
 
 const fetchInitialPosition = async () => {
@@ -73,7 +79,7 @@ function LocationMarker() {
 	return <Marker position={[position.lat, position.lng]}></Marker>;
 }
 
-const Map: React.FC<Props> = ({ forumid:forumId, zone: _zone }) => {
+const Map: React.FC<Props> = ({center: _center, forumid:forumId, zone: _zone, }) => {
 	const {
 		data: location,
 		isLoading,
@@ -83,9 +89,11 @@ const Map: React.FC<Props> = ({ forumid:forumId, zone: _zone }) => {
 		queryFn: () => fetchPosition(forumId),
 	});
 
+	const lat = _center?.lat || 8.296963; 
+	const lng = _center?.lng || -62.711613;
 	return (
 		<MapContainer
-			center={[8.296963, -62.711613]}
+			center={[lat, lng]}
 			zoom={13}
 			style={{ width: "800px", height: "400px" }}
 			className="mt-4 mx-auto w-full px-[40px]"
