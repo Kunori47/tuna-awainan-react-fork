@@ -3,6 +3,8 @@ import { supabase } from "@/lib/supabase";
 import { getSession } from "@/services/auth";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMap } from "@fortawesome/free-solid-svg-icons";
 
 export const Route = createFileRoute("/experto/post/")({
 	component: ExpertComponent,
@@ -75,9 +77,10 @@ function ExpertComponent() {
 								Foros publicados: {posts?.length}
 							</p>
 							<Link to={'/experto/post/map/mapPost'} >
-								<div className='absolute right-10 top-6 shadow-lg rounded-full bg-white size-[70px] hover:bg-slate-50'>
+								<div className='absolute justify-center right-10 top-6 shadow-lg rounded-full bg-white size-[70px] hover:bg-slate-50'>
+									<FontAwesomeIcon icon={faMap} className="right-5 top-6 text-5xl "/>
 									
-								</div>		
+								</div>	
 							</Link>
 							
 						</header>
