@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
 import { useQuery } from "@tanstack/react-query";
 import { getSession } from "@/services/auth";
+import { ClipLoader } from "react-spinners"; // Importa el spinner
 
 export const Route = createFileRoute("/articles/category/")({
 	component: ArticleRouteComponent,
@@ -67,7 +68,14 @@ function ArticleRouteComponent() {
 
 	const session_user = user?.role;
 
-	if (isLoading) return <div>Loading...</div>;
+	if (isLoading) return(
+		<div>
+			<Category />
+			<div className="flex justify-center items-center h-64">
+				<ClipLoader color="#0cc0df" size={50} />
+			</div>
+		</div>
+	);
 	if (error) return <div>Error: {error.message}</div>;
 
 	return (
