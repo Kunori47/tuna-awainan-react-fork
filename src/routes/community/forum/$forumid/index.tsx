@@ -7,6 +7,7 @@ import { fetchComments, postComment } from "@/services/comments";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import Map from "@/components/map/mapforum";
+import { ClipLoader } from "react-spinners"; 
 
 export const Route = createFileRoute("/community/forum/$forumid/")({
 	loader: ({ params }) => fetchForumById(params.forumid),
@@ -89,7 +90,12 @@ function ForumComponent() {
 	}
 	};	
 
-	if (isLoading) return <div>Loading...</div>;
+	if (isLoading) return <div>
+	
+	<div className="flex justify-center items-center h-64">
+		<ClipLoader color="#0cc0df" size={50} />
+	</div>
+</div>;
 	if (error) return <div>Error: {error.message}</div>;
 
 	return (

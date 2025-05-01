@@ -3,7 +3,7 @@ import { supabase } from "@/lib/supabase";
 import { getSession } from "@/services/auth";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
-
+import { ClipLoader } from "react-spinners"; 
 export const Route = createFileRoute("/community/forum/")({
 	component: CommunityComponent,
 });
@@ -35,7 +35,12 @@ function CommunityComponent() {
 		queryFn: getSession,
 	});
 
-	if (isLoading) return <div>Loading...</div>;
+	if (isLoading) return <div>
+
+	<div className="flex justify-center items-center h-64">
+		<ClipLoader color="#0cc0df" size={50} />
+	</div>
+</div>;
 	if (error) return <div>Error: {error.message}</div>;
 
 	return (

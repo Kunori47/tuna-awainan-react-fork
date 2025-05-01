@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
+import { ClipLoader } from "react-spinners"; 
 
 export const Route = createFileRoute("/articles/category/$categoryid/")({
 	loader: ({ params }) => fetchArticleById(params.categoryid),
@@ -32,7 +33,12 @@ function ArticleComponent() {
 		queryFn: () => fetchArticleById(categoryid), // Función para obtener datos
 	});
 	const article = articles && articles[0];
-	if (isLoading) return <div>Loading...</div>;
+	if (isLoading) return <div>
+	
+	<div className="flex justify-center items-center h-64">
+		<ClipLoader color="#0cc0df" size={50} />
+	</div>
+</div>;
 	if (error) return <div>Error: {error.message}</div>;
 
 	return (
