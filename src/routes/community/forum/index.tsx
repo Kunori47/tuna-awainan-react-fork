@@ -52,7 +52,7 @@ function CommunityComponent() {
 							</p>
 						</header>
 						{session ? (
-							<Button className="w-1/6 hover:bg-[#087b9b] min-w-fit">
+							<Button className="w-1/6 hover:bg-[#047A8F] min-w-fit">
 								<Link to={"/community/forum/new"}>Crear un nuevo foro</Link>
 							</Button>
 						) : null}

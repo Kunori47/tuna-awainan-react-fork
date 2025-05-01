@@ -36,7 +36,7 @@ function EspecimensComponent() {
 			<LayoutAquarium></LayoutAquarium>
 			{especimen && (
 				<div>
-					<h2 className="text-5xl text-[#0cc0df] text-center mt-40">
+					<h2 className="text-5xl text-[#047A8F] text-center mt-40">
 						{especimen.name}
 					</h2>
 					<h3 className="text-4xl italic text-center mt-4 -ml-12">

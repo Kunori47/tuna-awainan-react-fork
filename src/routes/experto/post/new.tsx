@@ -66,7 +66,7 @@ function NewPostingComponent() {
 
 	return (
 		<section className="bg-white dark:bg-gray-900">
-			<Button className="m-8 hover:bg-[#087b9b]">
+			<Button className="m-8 hover:bg-[#047A8F]">
 				<Link to={"/experto/post"}>Atrás</Link>
 			</Button>
 
@@ -87,7 +87,7 @@ function NewPostingComponent() {
 								type="text"
 								name="title"
 								id="title"
-								className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0cc0df] focus:border-[#0cc0df] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0cc0df] dark:focus:border-[#0cc0df]"
+								className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#047A8F] focus:border-[#047A8F] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#047A8F] dark:focus:border-[#047A8F]"
 								placeholder="Titulo de la publicación"
 								required
 							/>
@@ -104,7 +104,7 @@ function NewPostingComponent() {
 								name="content"
 								id="content"
 								rows={8}
-								className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-[#0cc0df] focus:border-[#0cc0df] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0cc0df] dark:focus:border-[#0cc0df]"
+								className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-[#047A8F] focus:border-[#047A8F] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#047A8F] dark:focus:border-[#047A8F]"
 								placeholder="Contenido de la publicación"
 								required
 							></textarea>
@@ -122,7 +122,7 @@ function NewPostingComponent() {
 					</div>
 					<button
 						type="submit"
-						className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-[#0cc0df] rounded-lg focus:ring-4 focus:ring-[#0cc0df] dark:focus:ring-[#0cc0df] hover:bg-[#0cc0df]"
+						className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-[#047A8F] rounded-lg focus:ring-4 focus:ring-[#047A8F] dark:focus:ring-[#047A8F] hover:bg-[#047A8F]"
 					>
 						Crear publicación
 					</button>

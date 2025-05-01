@@ -76,11 +76,11 @@ function ExpertComponent() {
 							</p>
 						</header>
 						{session_user === "specialist" || session_user === "admin" ? (
-							<Button className="w-1/6 hover:bg-[#087b9b] min-w-fit">
+							<Button className="w-1/6 hover:bg-[#047A8F] min-w-fit">
 								<Link to={"/experto/post/new"}>Crear un nuevo post</Link>
 							</Button>
 						) : (
-							<Button className="w-1/6 hover:bg-[#087b9b]">
+							<Button className="w-1/6 hover:bg-[#047A8F]">
 								<a href="mailto:grupotunawainan@gmail.com?subject=Solicitud para crear posts&body=Coloque su usuario y escriba la razón del porqué quiere crear un post en la página.">
 									Solicitud para crear posts
 								</a>

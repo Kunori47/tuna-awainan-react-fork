@@ -96,7 +96,7 @@ function PostComponent() {
 						: "Unknown Date"}
 				</p>
 			</div>
-			<Button className="m-8 hover:bg-[#087b9b]">
+			<Button className="m-8 hover:bg-[#047A8F]">
 				<Link to={"/experto/post"}>Atrás</Link>
 			</Button>
 
@@ -131,7 +131,7 @@ function PostComponent() {
 					</div>
 					<button
 						type="submit"
-						className="inline-flex items-center bg-[#0cc0df] ml-auto py-2.5 px-4 text-xs font-medium text-center text-white bg-[p] rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-primary-900 hover:bg-primary-800"
+						className="inline-flex items-center bg-[#047A8F] ml-auto py-2.5 px-4 text-xs font-medium text-center text-white bg-[p] rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-primary-900 hover:bg-primary-800"
 					>
 						Enviar
 					</button>

@@ -10,7 +10,7 @@ function introExpertComponent() {
     <section className='flex-grow flex flex-col justify-center items-center bg-white text-gray-800 p-4 md:p-8'>
       <div className='text-center max-w-3xl space-y-4 md:space-y-8'>
 
-        <h1 className='text-3xl md:text-4xl font-normal mb-4 text-[#0aaccb]'>
+        <h1 className='text-3xl md:text-4xl font-normal mb-4 text-[#047A8F]'>
           Hablando con Expertos
         </h1>
 
@@ -20,7 +20,7 @@ function introExpertComponent() {
       
         </p>
 
-        <Button className='hover:bg-[#087b9b]'>
+        <Button className='hover:bg-[#047A8F]'>
           <Link to={'/experto/post'}> Ver posts</Link>
         </Button>
 

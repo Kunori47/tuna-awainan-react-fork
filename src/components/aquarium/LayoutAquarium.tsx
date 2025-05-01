@@ -15,7 +15,7 @@ const aquarium: string[] = Array.from(letterAllowed).sort()
 export function LayoutAquarium(){
     return (
             <section className='grid grid-cols 2'>
-                <div className='flex flex-row pt-8 justify-center flex-wrap gap-x-4 gap-y-4 bg-[#0cc0df]'>
+                <div className='flex flex-row pt-8 justify-center flex-wrap gap-x-4 gap-y-4 bg-[#047A8F]'>
                     {
                         aquarium.map((letter) => (
                             <>

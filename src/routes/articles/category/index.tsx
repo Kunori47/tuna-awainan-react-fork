@@ -72,7 +72,7 @@ function ArticleRouteComponent() {
 		<div>
 			<Category />
 			<div className="flex justify-center items-center h-64">
-				<ClipLoader color="#0cc0df" size={50} />
+				<ClipLoader color="#047A8F" size={50} />
 			</div>
 		</div>
 	);
@@ -94,7 +94,7 @@ function ArticleRouteComponent() {
 							</p>
 						</header>
 						{session_user === "admin" ? (
-							<Button className="w-fit hover:bg-[#087b9b]">
+							<Button className="w-fit hover:bg-[#047A8F]">
 								<Link to={"/articles/category/new"}>
 									Crear un nuevo artículo
 								</Link>

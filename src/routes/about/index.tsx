@@ -10,28 +10,28 @@ function AboutComponent() {
 
   return (<div className='grid grid-cols-1 md:grid-cols-2'>
     <div className='font-custom flex flex-col items-center justify-center h-screen'>
-      <h1 className='text-5xl leading-tight text-center font-extrabold text-[#0cc0df]'>
+      <h1 className='text-5xl leading-tight text-center font-extrabold text-[#047A8F]'>
         SOBRE TUNA <br />AWAINAN 
       </h1>
       <hr />
       <div className='font-semibold px-20' style={{ textAlign: 'justify' }}>
         &ensp; Nuestro objetivo es promover la 
 
-        <span className='text-[#0cc0df]'>
+        <span className='text-[#047A8F]'>
         &ensp;cultura del agua
         </span>
         <span className='text-black'>
         &ensp;en el estado Bolívar, a fin de mejorar la calidad de vida de sus
           habitantes.
         </span>
-        <span className='text-[#0cc0df]'>
+        <span className='text-[#047A8F]'>
         &ensp;Tuna awainan
         </span>
         <span className='text-black'>
         &ensp;es un término en pemón que significa
         </span>
 
-        <span className='text-[#0cc0df]'>
+        <span className='text-[#047A8F]'>
         &ensp;agua clara
         </span>
 

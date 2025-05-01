@@ -29,16 +29,16 @@ export const AnswerSection: React.FC<AnswerSectionProps> = ({
         <button
             //onClick={() => setShowReplyBox(!showReplyBox)}
             onClick={onReply}
-            className="text-xs text-gray-500 hover:text-[#087b9b] transition-colors"
+            className="text-xs text-gray-500 hover:text-[#047A8F] transition-colors"
             >
               Responder
           </button> 
 
         <button
           onClick={onToggle}
-          className="text-xs text-gray-500 hover:text-[#087b9b] transition-colors flex items-center gap-1">
+          className="text-xs text-gray-500 hover:text-[#047A8F] transition-colors flex items-center gap-1">
             {showAnswers ? "Ocultar respuestas" : "Ver respuestas"} 
-          <span className="text-xs text-gray-500 hover:text-[#087b9b] transition-colors">({answers.length})</span>
+          <span className="text-xs text-gray-500 hover:text-[#047A8F] transition-colors">({answers.length})</span>
         </button> 
       </div> 
       

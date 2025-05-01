@@ -11,7 +11,7 @@ function RouteComponent() {
     <section className='flex-grow flex flex-col justify-center items-center bg-white text-gray-800 p-4 md:p-8'>
       <div className='text-center max-w-3xl space-y-4 md:space-y-8'>
 
-        <h1 className='text-3xl md:text-4xl font-normal mb-4 text-[#0aaccb]'>
+        <h1 className='text-3xl md:text-4xl font-normal mb-4 text-[#047A8F]'>
             Sección Comunidad
         </h1>
 
@@ -20,7 +20,7 @@ function RouteComponent() {
             <br /> Al ser usuario registrado, podrás interactuar y enriquecer el contenido compartiendo tus opiniones a través de los comentarios.
         </p>
 
-        <Button className='hover:bg-[#087b9b]'>
+        <Button className='hover:bg-[#047A8F]'>
           <Link to={'/community/forum'}> Ver posts</Link>
         </Button>
 

@@ -56,7 +56,7 @@ export const ReplyBox: React.FC<ReplyBoxProps> = ({ onSubmit, onCancel, commentI
 
           <Button
             type="submit"
-            className="bg-[#0cc0df] hover:bg-[#087b9b] text-white text-xs" 
+            className="bg-[#047A8F] hover:bg-[#047A8F] text-white text-xs" 
           >
             Publicar respuesta
           </Button>

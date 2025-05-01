@@ -28,12 +28,12 @@ export function AppSidebar() {
             TUNA
           </h2>
           <h2 className="scroll-m-20 pb-2 text-4xl
-          text-primary font-semibold tracking-tight text-center first:mt-0">
+          text-primary font-semibold tracking-tight text-center first:mt-0 tex">
             AWAINAN
           </h2>
         </SidebarGroup>
         <SidebarGroup className="flex flex-col gap-1 flex-1 pt-0 justify-center items-start start-5">
-          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
+          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl ">
             <Link to="/">Inicio</Link>
           </Button>
           <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
