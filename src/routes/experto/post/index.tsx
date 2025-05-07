@@ -77,8 +77,8 @@ function ExpertComponent() {
 								Foros publicados: {posts?.length}
 							</p>
 							<Link to={'/experto/post/map/mapPost'} >
-								<div className='absolute justify-center right-10 top-6 shadow-lg rounded-full bg-white size-[70px] hover:bg-slate-50'>
-									<FontAwesomeIcon icon={faMap} className="right-5 top-6 text-5xl "/>
+								<div className='absolute justify-center right-10 top-6 shadow-lg rounded-full bg-white size-[70px] hover:bg-slate-50  '>
+									<FontAwesomeIcon icon={faMap} className="absolute right-2 top-3 text-5xl justify-center text-gray-700"/>
 									
 								</div>	
 							</Link>

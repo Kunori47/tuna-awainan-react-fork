@@ -3,6 +3,8 @@ import Map from '@/components/map/mapAllForum'
 import { supabase } from "@/lib/supabase";
 import { Forun } from '@/components/map/mapAllForum';
 import { useQuery } from '@tanstack/react-query';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMap } from '@fortawesome/free-solid-svg-icons';
 export const Route = createFileRoute('/experto/post/map/mapPost')({
   component: RouteComponent,
 })
@@ -50,7 +52,8 @@ function RouteComponent() {
 							</h2>
                   <Link to={'/experto/post'} >
                         <div className='absolute right-10 top-6 shadow-lg rounded-full bg-[#0cc0df] size-[70px]'>
-                      
+                            <FontAwesomeIcon icon={faMap} className="absolute right-2 top-3 text-5xl justify-center text-gray-50"/>
+                            
                         </div>
                     </Link>
                 </div>
