@@ -38,3 +38,30 @@ export function Category() {
     </div>);
 
 }
+
+export function TopBar() {
+    return (
+        <div className="container mx-auto py-2 bg-[#0aaccb] md: max-w-full">
+            
+            <div className='flex flex-wrap justify-center space-x-4 overflow-x-auto hide-scroll-bar'>
+                <div className='flex flex-wrap gap-[250px] justify-center space-x-4 overflow-x-auto hide-scroll-bar'>
+                    <h2 className="font-custom flex pt-5 justify-center text-5xl font-bold text-white mb-4">Novedades</h2>
+                    
+                </div>
+            
+            </div>
+        </div>
+    );
+}
+
+/*
+<p className='mb-3 text-white bg-[#0aaccb] hover:bg-[#087b9b] text-md font-medium rounded-full px-4 py-1
+                    transition-colors duration-300 whitespace-nowrap'>
+                        Articulos 
+                    </p>
+                    <p className='mb-3 text-white bg-[#0aaccb] hover:bg-[#087b9b] text-md font-medium rounded-full px-4 py-1
+                    transition-colors duration-300 whitespace-nowrap'>
+                        Expertos
+                    </p>
+
+*/

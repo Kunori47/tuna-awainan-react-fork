@@ -27,7 +27,7 @@ export function Articles() {
         <div className="font-custom max-w-screen-lg mx-auto gap-8 lg:px-[6rem] md:px-[6rem]">
             <div className="flex flex-col gap-4">
             <header>
-                <h2 className="text-3xl font-bold text-center my-8 mb-2">Artículos</h2>
+                <h1 className="text-3xl font-bold text-center my-8 mb-2">Artículos</h1>
             </header>
 
             <div className="card">
@@ -41,7 +41,7 @@ export function Articles() {
                         <div className="w-1/2 h-full">
                         <img
                             className="object-cover w-full h-full"
-                            src={article.img}
+                            src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${article.img}`}
                             alt={article.title}
                         />
                         </div>

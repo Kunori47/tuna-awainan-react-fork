@@ -59,7 +59,7 @@ export function AppSidebar() {
               <Button
                 onClick={() => lgoutMutaion.mutate()}
                 variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
-                Logout
+                Cerrar Sesion
               </Button>
             ) : (
               <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">

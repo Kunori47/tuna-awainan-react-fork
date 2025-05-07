@@ -21,7 +21,7 @@ function introExpertComponent() {
         </p>
 
         <Button className='hover:bg-[#087b9b]'>
-          <Link to={'/experto/post'}> Ver posts</Link>
+          <Link to={'/experto/post'}> Ver foros</Link>
         </Button>
 
       </div>
