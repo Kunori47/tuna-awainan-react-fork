@@ -66,24 +66,27 @@ function ExpertComponent() {
 
 	return (
 		<>
+			<header className="flex items-center bg-[#0aaccb] justify-center h-28">
+				<div className="bg-[#0aaccb] pb-16 border-none flex items-center justify-center h-24">
+        			<h2 className='text-3xl md:text-4xl font-bold text-white mt-10'>Hablando con Expertos</h2>
+      			</div>
+				<Link to={'/experto/post/map/mapPost'} >
+					<div className='absolute justify-center right-10 top-6 shadow-lg rounded-full bg-white size-[70px] hover:bg-slate-50  '>
+						<FontAwesomeIcon icon={faMap} className="absolute right-2 top-3 text-5xl justify-center text-gray-700"/>
+						
+					</div>	
+				</Link>
+			</header>
 			<section className="w-full px-24 sm:px-5 grid grid-cols-1 mx-auto">
+				
 				<div className="font-custom max-w-screen-lg mx-auto gap-8 lg:px-[6rem] md:px-[6rem]">
+					
+					
 					<div className="flex flex-col gap-4">
-						<header>
-							<h2 className="text-5xl font-bold text-center my-8 mb-2">
-								Hablando con Expertos
-							</h2>
-							<p className="text-base text-gray-700 dark:text-gray-400">
+						<p className="text-base text-gray-700 dark:text-gray-400">
 								Foros publicados: {posts?.length}
-							</p>
-							<Link to={'/experto/post/map/mapPost'} >
-								<div className='absolute justify-center right-10 top-6 shadow-lg rounded-full bg-white size-[70px] hover:bg-slate-50  '>
-									<FontAwesomeIcon icon={faMap} className="absolute right-2 top-3 text-5xl justify-center text-gray-700"/>
-									
-								</div>	
-							</Link>
+						</p>
 							
-						</header>
 						{session_user === "specialist" || session_user === "admin" ? (
 							<Button className="w-1/6 hover:bg-[#087b9b] min-w-fit">
 								<Link to={"/experto/post/new"}>Crear un nuevo foro</Link>

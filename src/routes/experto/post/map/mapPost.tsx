@@ -41,25 +41,22 @@ function RouteComponent() {
 
     console.log(forums);
 
-  return (<>
+  return (
+    <>
 
-      <section className="w-4/5 px-24 sm:px-5 grid grid-cols-1">
-            <div className="font-custom max-w-screen-lg gap-8">
-                <div className="flex flex-col">
+        <header className="bg-white  flex items-center justify-center h-28">
+				<div className="pb-16 border-none flex items-center justify-center h-24">
+        			<h2 className='text-3xl md:text-4xl font-bold text-black mt-10'>Hablando con Expertos</h2>
+      			</div>
+				<Link to={'/experto/post'} >
+					<div className='absolute right-10 top-6 shadow-lg rounded-full bg-[#0cc0df] size-[70px] '>
+						<FontAwesomeIcon icon={faMap} className="absolute right-2 top-3 text-5xl justify-center text-gray-50"/>
+						
+					</div>	
+				</Link>
+		</header>
 
-                <h2 className="text-5xl font-bold text-center my-8 mb-2">
-								Hablando con Expertos
-							</h2>
-                  <Link to={'/experto/post'} >
-                        <div className='absolute right-10 top-6 shadow-lg rounded-full bg-[#0cc0df] size-[70px]'>
-                            <FontAwesomeIcon icon={faMap} className="absolute right-2 top-3 text-5xl justify-center text-gray-50"/>
-                            
-                        </div>
-                    </Link>
-                </div>
-            </div>
-
-      </section>
+     
       <div className='absolute top-32'>  
                     <Map category={'experts'} forums={forums}></Map>
       </div> 

@@ -8,11 +8,15 @@ export const Route = createFileRoute('/community/introCommunity')({
 function RouteComponent() {
   return (
     <div className='min-h-screen flex flex-col'>
+    {/* Top Bar Azul */}
+    <div className="bg-[#0aaccb] pb-24">
+    </div>
+
     <section className='flex-grow flex flex-col justify-center items-center bg-white text-gray-800 p-4 md:p-8'>
       <div className='text-center max-w-3xl space-y-4 md:space-y-8'>
 
         <h1 className='text-3xl md:text-4xl font-normal mb-4 text-[#0aaccb]'>
-            Sección Comunidad
+            Comunidad 
         </h1>
 
         <p className='text-md md:text-lg text-gray-800 mb-32'>
