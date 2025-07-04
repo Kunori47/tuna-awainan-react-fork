@@ -109,7 +109,7 @@ function ArticleRouteComponent() {
 											<div className="w-1/2 h-full">
 												<img
 													className="object-cover w-full h-full"
-													src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${article.img}`}
+													src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/articles/${article.img}`}
 													alt={article.title}
 												/>
 											</div>
