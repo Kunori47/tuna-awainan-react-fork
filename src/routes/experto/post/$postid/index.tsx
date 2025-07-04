@@ -102,7 +102,7 @@ function PostComponent() {
 
 			<div className="max-w-4xl mx-auto p-6 bg-white rounded-xl mb-8">
 				<img
-					src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${posts.img}`}
+					src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/posts/${posts.img}`}
 					alt=""
 					className="w-full h-64 object-cover rounded-lg mb-6"
 				/>
@@ -111,7 +111,7 @@ function PostComponent() {
 
 				<p className="text-gray-700 leading-relaxed">{posts.content}</p>
 				<hr />
-				<Map forumid={postid}></Map>
+				<Map center={{lat: posts.latitud, lng: posts.longitud}} forumid={posts.id} zone={{lat: posts.latitud, lng: posts.longitud, ratio: posts.ratio}}></Map>
 				<form
 					className="mb-6 flex flex-col w-full mt-5"
 					onSubmit={handleSubmit}
