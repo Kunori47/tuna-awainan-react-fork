@@ -152,6 +152,7 @@ function PostComponent() {
 					required
 				  />
 				  <div className="mt-4 flex justify-end">
+            
 					<button
 					  type="submit"
 					  className="bg-[#0cc0df] hover:bg-[#087b9b] text-white px-6 py-2 rounded-lg text-sm font-medium transition-colors"

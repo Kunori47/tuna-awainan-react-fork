@@ -3,6 +3,8 @@ import { supabase } from "@/lib/supabase";
 import { getSession } from "@/services/auth";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMap } from "@fortawesome/free-solid-svg-icons";
 
 export const Route = createFileRoute("/experto/post/")({
 	component: ExpertComponent,

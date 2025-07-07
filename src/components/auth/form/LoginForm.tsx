@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "@tanstack/react-router";
+import { Link, useRouter } from "@tanstack/react-router";
 import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
 import { useMutation } from "@tanstack/react-query";
@@ -25,6 +25,8 @@ const loginSchema = z.object({
 export function LoginForm() {
   const { setSession } = useAuth()
   const { toast } = useToast()
+  const router = useRouter()
+  
   const loginMutation = useMutation({
     mutationFn: async (value: { email: string, password: string }) => {
       return login(value.email, value.password)
@@ -47,6 +49,13 @@ export function LoginForm() {
           title: 'Inicio de sesión exitoso',
           description: 'Bienvenido de vuelta!',
         })
+        
+        // Redirigir a novedades y recargar la página
+        setTimeout(() => {
+          router.navigate({ to: '/novedades' })
+          window.location.reload()
+        }, 1000)
+        
       } catch (error: unknown) {
         if (error instanceof AuthError) {
           if ((error as any).code === "email_not_confirmed") {
@@ -122,19 +131,22 @@ export function LoginForm() {
             )}
           />
         </div>
-        <Button
-          disabled={loginMutation.isPending}
-          type="submit" className="w-full">
-          {
-            loginMutation.isPending && (
-              <>
-                <Loader className="animate-spin" />
-                {" "}
-              </>
-            )
-          }
-          Iniciar sesión
-        </Button>
+        <div className="flex justify-center">
+          <Button
+            disabled={loginMutation.isPending}
+            type="submit" 
+            className="w-48 flex items-center justify-center text-center hover:text-black transition-colors"
+          >
+            {
+              loginMutation.isPending && (
+                <>
+                  <Loader className="animate-spin mr-2" />
+                </>
+              )
+            }
+            Iniciar sesión
+          </Button>
+        </div>
       </div>
       <div className="text-center text-sm">
         No tienes una cuenta?{' '}
