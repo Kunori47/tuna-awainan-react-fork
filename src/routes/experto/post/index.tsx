@@ -3,6 +3,8 @@ import { supabase } from "@/lib/supabase";
 import { getSession } from "@/services/auth";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMap } from "@fortawesome/free-solid-svg-icons";
 
 export const Route = createFileRoute("/experto/post/")({
 	component: ExpertComponent,
@@ -64,6 +66,38 @@ function ExpertComponent() {
 
 	return (
 		<>
+			<header className="flex items-center bg-[#0aaccb] justify-center h-28">
+				<div className="bg-[#0aaccb] pb-16 border-none flex items-center justify-center h-24">
+        			<h2 className='text-3xl md:text-4xl font-bold text-white mt-10'>Hablando con Expertos</h2>
+      			</div>
+				<Link to={'/experto/post/map/mapPost'} >
+					<div className='absolute justify-center right-10 top-6 shadow-lg rounded-full bg-white size-[70px] hover:bg-slate-50  '>
+						<FontAwesomeIcon icon={faMap} className="absolute right-2 top-3 text-5xl justify-center text-gray-700"/>
+						
+					</div>	
+				</Link>
+			</header>
+			<section className="w-full px-24 sm:px-5 grid grid-cols-1 mx-auto">
+				
+				<div className="font-custom max-w-screen-lg mx-auto gap-8 lg:px-[6rem] md:px-[6rem]">
+					
+					
+					<div className="flex flex-col gap-4">
+						<p className="text-base text-gray-700 dark:text-gray-400">
+								Foros publicados: {posts?.length}
+						</p>
+							
+						{session_user === "specialist" || session_user === "admin" ? (
+							<Button className="w-1/6 hover:bg-[#087b9b] min-w-fit">
+								<Link to={"/experto/post/new"}>Crear un nuevo foro</Link>
+							</Button>
+						) : (
+							<Button className="w-1/6 hover:bg-[#087b9b]">
+								<a href="mailto:grupotunawainan@gmail.com?subject=Solicitud para crear posts&body=Coloque su usuario y escriba la razón del porqué quiere crear un post en la página.">
+									Solicitud para crear un foro
+								</a>
+							</Button>
+						)}
         <section className="w-full px-24 sm:px-5 grid grid-cols-1 mx-auto">
             <div className="font-custom max-w-screen-lg mx-auto gap-8 lg:px-[6rem] md:px-[6rem]">
                 <div className="flex flex-col gap-4">
@@ -112,7 +146,8 @@ function ExpertComponent() {
                                     <div className="w-full h-64 md:w-1/2 md:h-auto">
                                         <img
                                             className="object-cover w-full h-full"
-                                            src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${post.img}`}
+                                            // src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${post.img}`}
+											src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/posts/${post.img}`}
                                             alt={post.title}
                                         />
                                     </div>

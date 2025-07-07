@@ -122,7 +122,8 @@ function PostComponent() {
 			<article className="prose lg:prose-xl max-w-none mb-12">
 			  {posts.img && (
 				<img
-				  src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${posts.img}`}
+				//   src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${posts.img}`}
+				src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/posts/${posts.img}`}
 				  alt=""
 				  className="w-full h-auto rounded-lg mb-8 object-cover"
 				/>
@@ -134,7 +135,8 @@ function PostComponent() {
 	
 			{/* Mapa */}
 			<div className="my-12">
-			  <Map forumid={postid} className="rounded-lg shadow-lg" />
+			  {/* <Map forumid={postid} className="rounded-lg shadow-lg" /> */}
+			  <Map center={{lat: posts.latitud, lng: posts.longitud}} forumid={posts.id} zone={{lat: posts.latitud, lng: posts.longitud, ratio: posts.ratio}}></Map>
 			</div>
 	
 			{/* comentarios */}

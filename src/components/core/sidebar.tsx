@@ -6,18 +6,28 @@ import {
   SidebarHeader,
 } from "@/components/ui/sidebar"
 import { Button } from "../ui/button"
-import { Link } from "@tanstack/react-router"
+import { Link, useRouter } from "@tanstack/react-router"
 import { useAuth } from "@/hooks/use-auth"
 import { logout } from "@/services/auth"
 import { useMutation } from "@tanstack/react-query"
 
 export function AppSidebar() {
   const { session } = useAuth()
+  const router = useRouter()
+  const currentPath = router.state.location.pathname
+  
   const lgoutMutaion = useMutation({
     mutationFn: async () => {
       await logout()
     }
   })
+
+  // Función para determinar si una ruta está activa
+  const isActiveRoute = (path: string) => {
+    if (path === "/" && currentPath === "/") return true
+    if (path !== "/" && currentPath.startsWith(path)) return true
+    return false
+  }
 
   return (
     <Sidebar>
@@ -33,25 +43,25 @@ export function AppSidebar() {
           </h2>
         </SidebarGroup>
         <SidebarGroup className="flex flex-col gap-1 flex-1 pt-0 justify-center items-start start-5">
-          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
+          <Button asChild variant={isActiveRoute("/") ? "sidebarLinkActive" : "sidebarLink"} size={"sidebarLink"} className="text-2xl">
             <Link to="/">Inicio</Link>
           </Button>
-          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
+          <Button asChild variant={isActiveRoute("/novedades") ? "sidebarLinkActive" : "sidebarLink"} size={"sidebarLink"} className="text-2xl">
             <Link to="/novedades">Novedades</Link>
           </Button>
-          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
+          <Button asChild variant={isActiveRoute("/aquarium") ? "sidebarLinkActive" : "sidebarLink"} size={"sidebarLink"} className="text-2xl">
             <Link to="/aquarium">Acuario</Link>
           </Button>
-          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
+          <Button asChild variant={isActiveRoute("/articles") ? "sidebarLinkActive" : "sidebarLink"} size={"sidebarLink"} className="text-2xl">
             <Link to="/articles/introArticles">Artículos</Link>
           </Button>
-          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
+          <Button asChild variant={isActiveRoute("/experto") ? "sidebarLinkActive" : "sidebarLink"} size={"sidebarLink"} className="text-2xl">
             <Link to="/experto/introExperto">Expertos</Link>
           </Button>
           <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
             <Link to="/community/introCommunity">Comunidad</Link>
           </Button>
-          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
+          <Button asChild variant={isActiveRoute("/about") ? "sidebarLinkActive" : "sidebarLink"} size={"sidebarLink"} className="text-2xl">
             <Link to="/about">Sobre nosotros</Link>
           </Button>
           {
@@ -59,10 +69,10 @@ export function AppSidebar() {
               <Button
                 onClick={() => lgoutMutaion.mutate()}
                 variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
-                Logout
+                Cerrar sesión
               </Button>
             ) : (
-              <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
+              <Button asChild variant={isActiveRoute("/auth") ? "sidebarLinkActive" : "sidebarLink"} size={"sidebarLink"} className="text-2xl">
                 <Link to="/auth/login">Iniciar sesión</Link>
               </Button>
             )

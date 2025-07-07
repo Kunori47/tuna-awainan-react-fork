@@ -5,7 +5,6 @@ import { getProfileId, getSession } from "@/services/auth";
 import { setPost } from "@/services/submit";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
-
 export const Route = createFileRoute("/experto/post/new")({
 	component: NewPostingComponent,
 });
@@ -118,6 +117,20 @@ function NewPostingComponent() {
 								Imagen
 							</label>
 							<input type="file" name="image" id="image" accept="posts/*" />
+						</div>
+						<div className="sm:col-span-2">
+						<label
+								htmlFor="content"
+								className="block mb-2 text-sm font-medium text-gray-900"
+							>
+								Tamaño de la zona (kilometros):
+							</label>
+							<input type='number' 
+							name='ratio' 
+							id='ratio' 
+							min='1' 
+							className='block p-2.5 w-[250px] text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-[#0cc0df] focus:border-[#0cc0df] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0cc0df] dark:focus:border-[#0cc0df] mt-6'/>
+					
 						</div>
 					</div>
 					<button
