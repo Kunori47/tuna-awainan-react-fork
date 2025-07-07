@@ -16,6 +16,6 @@ function NovedadesComponent() {
       
       <Articles></Articles>
       <Expert></Expert>
-    </div>
+    </div> 
   )
 }
