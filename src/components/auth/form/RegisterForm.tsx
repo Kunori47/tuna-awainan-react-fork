@@ -137,13 +137,12 @@ export function RegisterForm() {
         </div>
         <Button
           disabled={registerMutation.isPending}
-          type="submit" 
-          className="w-full flex items-center justify-center text-center hover:text-black transition-colors"
-        >
+          type="submit" className="w-full">
           {
             registerMutation.isPending && (
               <>
-                <Loader className="animate-spin mr-2" />
+                <Loader className="animate-spin" />
+                {" "}
               </>
             )
           }

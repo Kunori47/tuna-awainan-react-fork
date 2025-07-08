@@ -1,3 +1,4 @@
+import Map from "@/components/map/NewMapforum";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabase";
@@ -129,6 +130,36 @@ function NewPostingComponent() {
 							<input type="file" name="image" id="image" accept="posts/*" />
 						</div>
 						<div className="sm:col-span-2">
+						<div>
+							<p className='block mb-2 text-sm font-medium text-gray-900'>Coloque una marca para colocar su foro, para ubicar la latitud y la longitud <br/>
+							debe seleccionar el circulo blanco de la marca</p>
+							<Map></Map>
+						</div>
+						<label
+								htmlFor="content"
+								className="block  text-sm font-medium text-gray-900"
+							>
+								Latitud:
+							</label>
+							<input type='number' 
+							name='latiud' 
+							id='lat' 
+							min='-1000000000000000' 
+							className='block p-2.5 w-[250px] text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-[#0cc0df] focus:border-[#0cc0df] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0cc0df] dark:focus:border-[#0cc0df]'/>
+					
+						<label
+								htmlFor="content"
+								className="block mb-2 text-sm font-medium text-gray-900"
+							>
+								Longitud:
+							</label>
+							<input type='number' 
+							name='longitud' 
+							id='lon' 
+							min='-10000000000000' 
+							className='block p-2.5 w-[250px] text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-[#0cc0df] focus:border-[#0cc0df] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0cc0df] dark:focus:border-[#0cc0df] '/>
+					
+						
 						<label
 								htmlFor="content"
 								className="block mb-2 text-sm font-medium text-gray-900"
