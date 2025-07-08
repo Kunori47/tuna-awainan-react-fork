@@ -12,7 +12,6 @@ function NovedadesComponent() {
       <TopBar></TopBar>
       <Articles></Articles>
       <Expert></Expert>
-    
     </div>
   )
 }

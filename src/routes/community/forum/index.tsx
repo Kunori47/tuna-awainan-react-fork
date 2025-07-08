@@ -40,13 +40,14 @@ function CommunityComponent() {
 
 	return (
 		<>
+			<div className="bg-[#0aaccb] pb-16 border-none flex items-center justify-center h-24">
+       			 <h2 className='text-3xl md:text-4xl font-bold text-white mt-10'>Comunidad</h2>
+      		</div>
 			<section className="w-full px-24 sm:px-5 grid grid-cols-1 mx-auto">
 				<div className="font-custom max-w-screen-lg mx-auto gap-8 lg:px-[6rem] md:px-[6rem]">
 					<div className="flex flex-col gap-4">
 						<header>
-							<h2 className="text-3xl font-bold text-center my-8 mb-2">
-								Sección Comunidad
-							</h2>
+							
 							<p className="text-base text-gray-700 dark:text-gray-400">
 								Foros publicados: {forum?.length}
 							</p>

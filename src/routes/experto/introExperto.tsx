@@ -7,6 +7,9 @@ export const Route = createFileRoute('/experto/introExperto')({
 
 function introExpertComponent() {
   return (<div className='min-h-screen flex flex-col'>
+
+    <div className="bg-[#0aaccb] pb-24">
+    </div>
     <section className='flex-grow flex flex-col justify-center items-center bg-white text-gray-800 p-4 md:p-8'>
       <div className='text-center max-w-3xl space-y-4 md:space-y-8'>
 
