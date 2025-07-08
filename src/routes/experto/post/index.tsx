@@ -120,7 +120,7 @@ function ExpertComponent() {
 										<div className="w-full h-64 md:w-1/2 md:h-auto">
 											<img
 												className="object-cover w-full h-full"
-												src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/posts/${post.img}`}
+												src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${post.img}`}
 												alt={post.title}
 											/>
 										</div>

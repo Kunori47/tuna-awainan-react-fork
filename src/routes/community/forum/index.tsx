@@ -76,7 +76,7 @@ function CommunityComponent() {
                                                     <img
                                                         className="object-cover w-full h-full"
                                                         // src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${foro.img}`}
-                                                        src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/posts/${foro.img}`}
+                                                        src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${foro.img}`}
                                                         alt={foro.title}
                                                     />
                                                 </div>

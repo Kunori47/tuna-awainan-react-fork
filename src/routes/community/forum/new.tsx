@@ -5,7 +5,8 @@ import { setForum } from "@/services/submit";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useToast } from "@/hooks/use-toast";
-
+import ForumMap from "@/components/map/forumMap";
+import React, { useState } from "react";
 
 export const Route = createFileRoute("/community/forum/new")({
 	component: NewForumComponent,
@@ -14,6 +15,9 @@ export const Route = createFileRoute("/community/forum/new")({
 function NewForumComponent() {
 	const { toast } = useToast();
 	const queryClient = useQueryClient();
+	const [selectedLocation, setSelectedLocation] = useState({ lat: 0, lng: 0 });
+	const [radius, setRadius] = useState(5); // Radio por defecto en km
+	const formRef = React.useRef<HTMLFormElement>(null);
 
 	const { data: session } = useQuery({
 		queryKey: ["session"],
@@ -25,44 +29,67 @@ function NewForumComponent() {
 		queryFn: () => getProfileId(session?.user.id),
 	});
 
+	type ForumPayload = {
+		title: string;
+		content: string;
+		imageUrl: string | null;
+		latitud: number;
+		longitud: number;
+		radio: number;
+	};
+
 	const mutation = useMutation({
-		mutationFn: ({ title, content, imageUrl }) =>
-			setForum(title, content, id_user, imageUrl),
+		mutationFn: async ({ title, content, imageUrl, latitud, longitud, radio }: ForumPayload) =>
+			setForum(title, content, id_user, imageUrl, latitud, longitud, radio),
 		onSuccess: () => {
-			toast({
-				title: "Post creado correctamente 😀",
-			});
+			toast({ title: "Post creado correctamente 😀" });
 			queryClient.invalidateQueries({ queryKey: ["posts"] });
+			if (formRef.current) {
+				formRef.current.reset();
+			}
+			setSelectedLocation({ lat: 0, lng: 0 });
+			setRadius(5);
 		},
 		onError: () => {
-			toast({
-				title: "Error al crear el post 😞",
-			});
+			toast({ title: "Error al crear el post 😞" });
 		},
 	});
 
-	const handleSubmit = async (e) => {
+	const handleLocationSelect = (location: { lat: number; lng: number }) => {
+		setSelectedLocation(location);
+	};
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const formData = new FormData(e.target);
-		const title = formData.get("title");
-		const content = formData.get("content");
-		const file = formData.get("image");
+		const formData = new FormData(e.currentTarget);
+		const title = String(formData.get("title") || "");
+		const content = String(formData.get("content") || "");
+		const file = formData.get("image") as File | null;
 
-		let imageUrl = null;
+		let imageUrl: string | null = null;
 
-		if (file) {
+		if (file && file instanceof File && file.size > 0) {
+			const uniqueName = `${Date.now()}_${file.name.replace(/\s+/g, "_")}`;
 			const { data, error } = await supabase.storage
 				.from("files")
-				.upload(`posts/${title}`, file);
+				.upload(`posts/${uniqueName}`, file);
 
-			if (error) {
-				console.error(error);
+			if (error || !data) {
+				toast({ title: "Error al subir la imagen 😞" });
+				return;
 			}
 
-			imageUrl = data?.path;
+			imageUrl = data.path;
 		}
-		mutation.mutate({ title, content, imageUrl });
-		e.target.reset();
+
+		mutation.mutate({
+			title,
+			content,
+			imageUrl,
+			latitud: selectedLocation.lat,
+			longitud: selectedLocation.lng,
+			radio: radius,
+		});
 	};
 
 	return (
@@ -75,7 +102,7 @@ function NewForumComponent() {
 				<h2 className="mb-4 text-xl font-bold text-gray-900">
 					Añadir nueva publicación
 				</h2>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit} ref={formRef}>
 					<div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
 						<div className="sm:col-span-2">
 							<label
