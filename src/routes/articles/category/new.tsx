@@ -75,7 +75,7 @@ function RouteComponent() {
 				<Link to={"/articles/category"}>Atrás</Link>
 			</Button>
 
-			<div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+			<div className="py-8 px-4 mx-auto max-w-2xl lg:pt-8 lg:pb-16">
 				<h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
 					Añadir nueva publicación
 				</h2>
@@ -139,7 +139,7 @@ function RouteComponent() {
 							>
 								Categoria
 							</label>
-							<select name="category" id="category">
+							<select name="category" id="category" className="bg-white text-sm">
 								{category &&
 									category.map((category) => (
 										<option value={category.id}>{category.name}</option>
@@ -154,14 +154,14 @@ function RouteComponent() {
 							>
 								Imagen
 							</label>
-							<input type="file" name="image" id="image" accept="articles/*" />
+							<input type="file" name="image" id="image" accept="articles/*" className="text-sm" />
 						</div>
 					</div>
 					<button
 						type="submit"
-						className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-[#0cc0df] rounded-lg focus:ring-4 focus:ring-[#0cc0df] dark:focus:ring-[#0cc0df] hover:bg-[#0cc0df]"
+						className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-[#0cc0df] hover:bg-[#087b9b] rounded-lg dark:focus:ring-[#0cc0df]"
 					>
-						Crear publicación
+						Crear publicacaión
 					</button>
 				</form>
 			</div>

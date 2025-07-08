@@ -6,15 +6,15 @@ import {
   SidebarHeader,
 } from "@/components/ui/sidebar"
 import { Button } from "../ui/button"
-import { Link, useRouter } from "@tanstack/react-router"
+import { Link, useLocation } from "@tanstack/react-router"
 import { useAuth } from "@/hooks/use-auth"
 import { logout } from "@/services/auth"
 import { useMutation } from "@tanstack/react-query"
 
 export function AppSidebar() {
   const { session } = useAuth()
-  const router = useRouter()
-  const currentPath = router.state.location.pathname
+  const location = useLocation()
+  const currentPath = location.pathname
   
   const lgoutMutaion = useMutation({
     mutationFn: async () => {
@@ -22,12 +22,55 @@ export function AppSidebar() {
     }
   })
 
-  // Función para determinar si una ruta está activa
-  const isActiveRoute = (path: string) => {
-    if (path === "/" && currentPath === "/") return true
-    if (path !== "/" && currentPath.startsWith(path)) return true
-    return false
+  // Debug: Mostrar información de la ruta actual
+  console.log('Current path:', currentPath)
+  console.log('Location object:', location)
+
+  // Implementación usando useLocation y pathname
+  const getActiveSection = () => {
+    // Normalizar el pathname (remover trailing slash)
+    const normalizedPath = currentPath.replace(/\/$/, '')
+    
+    console.log('Normalized path:', normalizedPath)
+    
+    // Casos específicos para cada sección
+    if (normalizedPath === '') {
+      return 'home'
+    }
+    
+    if (normalizedPath === '/novedades') {
+      return 'novedades'
+    }
+    
+    if (normalizedPath === '/about') {
+      return 'about'
+    }
+    
+    if (normalizedPath.startsWith('/aquarium')) {
+      return 'aquarium'
+    }
+    
+    if (normalizedPath.startsWith('/articles')) {
+      return 'articles'
+    }
+    
+    if (normalizedPath.startsWith('/experto')) {
+      return 'experto'
+    }
+    
+    if (normalizedPath.startsWith('/community')) {
+      return 'community'
+    }
+    
+    if (normalizedPath.startsWith('/auth')) {
+      return 'auth'
+    }
+    
+    return 'home'
   }
+
+  const activeSection = getActiveSection()
+  console.log('Active section determined:', activeSection)
 
   return (
     <Sidebar>
@@ -43,36 +86,79 @@ export function AppSidebar() {
           </h2>
         </SidebarGroup>
         <SidebarGroup className="flex flex-col gap-1 flex-1 pt-0 justify-center items-start start-5">
-          <Button asChild variant={isActiveRoute("/") ? "sidebarLinkActive" : "sidebarLink"} size={"sidebarLink"} className="text-2xl">
+          <Button 
+            asChild 
+            variant={activeSection === 'home' ? "sidebarLinkActive" : "sidebarLink"} 
+            size={"sidebarLink"} 
+            className="text-2xl"
+          >
             <Link to="/">Inicio</Link>
           </Button>
-          <Button asChild variant={isActiveRoute("/novedades") ? "sidebarLinkActive" : "sidebarLink"} size={"sidebarLink"} className="text-2xl">
+          <Button 
+            asChild 
+            variant={activeSection === 'novedades' ? "sidebarLinkActive" : "sidebarLink"} 
+            size={"sidebarLink"} 
+            className="text-2xl"
+          >
             <Link to="/novedades">Novedades</Link>
           </Button>
-          <Button asChild variant={isActiveRoute("/aquarium") ? "sidebarLinkActive" : "sidebarLink"} size={"sidebarLink"} className="text-2xl">
+          <Button 
+            asChild 
+            variant={activeSection === 'aquarium' ? "sidebarLinkActive" : "sidebarLink"} 
+            size={"sidebarLink"} 
+            className="text-2xl"
+          >
             <Link to="/aquarium">Acuario</Link>
           </Button>
-          <Button asChild variant={isActiveRoute("/articles") ? "sidebarLinkActive" : "sidebarLink"} size={"sidebarLink"} className="text-2xl">
+          <Button 
+            asChild 
+            variant={activeSection === 'articles' ? "sidebarLinkActive" : "sidebarLink"} 
+            size={"sidebarLink"} 
+            className="text-2xl"
+          >
             <Link to="/articles/introArticles">Artículos</Link>
           </Button>
-          <Button asChild variant={isActiveRoute("/experto") ? "sidebarLinkActive" : "sidebarLink"} size={"sidebarLink"} className="text-2xl">
+          <Button 
+            asChild 
+            variant={activeSection === 'experto' ? "sidebarLinkActive" : "sidebarLink"} 
+            size={"sidebarLink"} 
+            className="text-2xl"
+          >
             <Link to="/experto/introExperto">Expertos</Link>
           </Button>
-          <Button asChild variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
+          <Button 
+            asChild 
+            variant={activeSection === 'community' ? "sidebarLinkActive" : "sidebarLink"} 
+            size={"sidebarLink"} 
+            className="text-2xl"
+          >
             <Link to="/community/introCommunity">Comunidad</Link>
           </Button>
-          <Button asChild variant={isActiveRoute("/about") ? "sidebarLinkActive" : "sidebarLink"} size={"sidebarLink"} className="text-2xl">
+          <Button 
+            asChild 
+            variant={activeSection === 'about' ? "sidebarLinkActive" : "sidebarLink"} 
+            size={"sidebarLink"} 
+            className="text-2xl"
+          >
             <Link to="/about">Sobre nosotros</Link>
           </Button>
           {
             session ? (
               <Button
                 onClick={() => lgoutMutaion.mutate()}
-                variant={"sidebarLink"} size={"sidebarLink"} className="text-2xl">
-                Logout
+                variant={"sidebarLink"} 
+                size={"sidebarLink"} 
+                className="text-2xl"
+              >
+                Cerrar sesión
               </Button>
             ) : (
-              <Button asChild variant={isActiveRoute("/auth") ? "sidebarLinkActive" : "sidebarLink"} size={"sidebarLink"} className="text-2xl">
+              <Button 
+                asChild 
+                variant={activeSection === 'auth' ? "sidebarLinkActive" : "sidebarLink"} 
+                size={"sidebarLink"} 
+                className="text-2xl"
+              >
                 <Link to="/auth/login">Iniciar sesión</Link>
               </Button>
             )
