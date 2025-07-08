@@ -94,7 +94,7 @@ function PostComponent() {
 					<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
 					</svg>
-					Volver
+					Volver a expertos
 					</Link>
 				</Button>
 			</div>
@@ -122,7 +122,8 @@ function PostComponent() {
 			<article className="prose lg:prose-xl max-w-none mb-12">
 			  {posts.img && (
 				<img
-				  src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${posts.img}`}
+				//   src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${posts.img}`}
+				src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/posts/${posts.img}`}
 				  alt=""
 				  className="w-full h-auto rounded-lg mb-8 object-cover"
 				/>
@@ -134,7 +135,8 @@ function PostComponent() {
 	
 			{/* Mapa */}
 			<div className="my-12">
-			  <Map forumid={postid} className="rounded-lg shadow-lg" />
+			  {/* <Map forumid={postid} className="rounded-lg shadow-lg" /> */}
+			  <Map center={{lat: posts.latitud, lng: posts.longitud}} forumid={posts.id} zone={{lat: posts.latitud, lng: posts.longitud, ratio: posts.ratio}}></Map>
 			</div>
 	
 			{/* comentarios */}
@@ -152,7 +154,6 @@ function PostComponent() {
 					required
 				  />
 				  <div className="mt-4 flex justify-end">
-            
 					<button
 					  type="submit"
 					  className="bg-[#0cc0df] hover:bg-[#087b9b] text-white px-6 py-2 rounded-lg text-sm font-medium transition-colors"

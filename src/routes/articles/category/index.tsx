@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
 import { useQuery } from "@tanstack/react-query";
 import { getSession } from "@/services/auth";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMap } from "@fortawesome/free-solid-svg-icons";
 
 export const Route = createFileRoute("/articles/category/")({
     component: ArticleRouteComponent,
@@ -76,7 +78,7 @@ function ArticleRouteComponent() {
 
             <section className="w-full px-24 sm:px-5 grid grid-cols-1 mx-auto">
                 <div className="font-custom max-w-screen-lg mx-auto gap-8 lg:px-[6rem] md:px-[6rem]">
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col">
                         <header>
                             <h2 className="text-3xl font-bold text-center my-8 mb-2">Artículos</h2>
                             
@@ -101,6 +103,12 @@ function ArticleRouteComponent() {
                                     <div></div>
                                 )}
                             </div>
+                            <Link to={'/experto/post/map/mapPost'} >
+                                <div className='absolute justify-center right-10 top-6 shadow-lg rounded-full bg-white size-[70px] hover:bg-slate-50  '>
+                                    <FontAwesomeIcon icon={faMap} className="absolute right-2 top-3 text-5xl justify-center text-gray-700"/>
+                                    
+                                </div>	
+                            </Link>
                         </header>
 
                         <div className="card">
@@ -118,7 +126,8 @@ function ArticleRouteComponent() {
                                                 <div className="w-full h-64 md:w-1/2 md:h-auto">
                                                     <img
                                                         className="object-cover w-full h-full"
-                                                        src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${article.img}`}
+                                                        // src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${article.img}`}
+                                                        src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/articles/${article.img}`}
                                                         alt={article.title}
                                                     />
                                                 </div>
