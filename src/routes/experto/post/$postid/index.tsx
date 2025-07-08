@@ -123,7 +123,7 @@ function PostComponent() {
 			  {posts.img && (
 				<img
 				//   src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${posts.img}`}
-				src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/posts/${posts.img}`}
+				src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${posts.img}`}
 				  alt=""
 				  className="w-full h-auto rounded-lg mb-8 object-cover"
 				/>

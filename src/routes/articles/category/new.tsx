@@ -4,6 +4,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabase";
 import { setArticles } from "@/services/submit";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import React from "react";
 
 export const Route = createFileRoute("/articles/category/new")({
 	component: RouteComponent,
@@ -11,11 +12,9 @@ export const Route = createFileRoute("/articles/category/new")({
 
 const fetchCategory = async () => {
 	const { data, error } = await supabase.from("tags").select("*");
-
 	if (error) {
 		console.error(error);
 	}
-
 	return data;
 };
 
@@ -28,58 +27,68 @@ function RouteComponent() {
 		queryFn: fetchCategory,
 	});
 
+	// Referencia al formulario para poder resetearlo desde onSuccess
+	const formRef = React.useRef<HTMLFormElement>(null);
+
 	const mutation = useMutation({
-		mutationFn: ({ title, content, imageUrl, category, author }) =>
-			setArticles(title, content, imageUrl, category, author),
+		mutationFn: async ({ title, content, imageUrl, category, author }: {
+			title: string,
+			content: string,
+			imageUrl: string | null,
+			category: string,
+			author: string
+		}) => setArticles(title, content, imageUrl, category, author),
 		onSuccess: () => {
-			// Invalidate and refetch
-			toast({
-				title: "Articulo creado correctamente 😀",
-			});
+			toast({ title: "Artículo creado correctamente 😀" });
 			queryClient.invalidateQueries({ queryKey: ["articles"] });
+			// Limpiar el formulario
+			if (formRef.current) {
+				formRef.current.reset();
+			}
 		},
 		onError: () => {
-			toast({
-				title: "Error al crear el Articulo 😞",
-			});
+			toast({ title: "Error al crear el Artículo 😞" });
 		},
 	});
-	const handleSubmit = async (e) => {
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const formData = new FormData(e.target);
-		const title = formData.get("title");
-		const content = formData.get("content");
-		const file = formData.get("image");
-		const author = formData.get("author");
-		const category = formData.get("category");
+		const formData = new FormData(e.currentTarget);
+		const title = String(formData.get("title") || "");
+		const content = String(formData.get("content") || "");
+		const file = formData.get("image") as File | null;
+		const author = String(formData.get("author") || "");
+		const category = String(formData.get("category") || "");
 
-		let imageUrl = null;
+		let imageUrl: string | null = null;
 
-		if (file) {
+		if (file && file instanceof File && file.size > 0) {
+			const uniqueName = `${Date.now()}_${file.name.replace(/\s+/g, "_")}`;
 			const { data, error } = await supabase.storage
 				.from("files")
-				.upload(`articles/${title}`, file);
+				.upload(`articles/${uniqueName}`, file);
 
-			if (error) {
-				console.error(error);
+			if (error || !data) {
+				toast({ title: "Error al subir la imagen 😞" });
+				return; 
 			}
 
-			imageUrl = data?.path;
+			imageUrl = data.path; // Siempre  tipo 'articles/uniqueName.jpg'
 		}
+
 		mutation.mutate({ title, content, imageUrl, category, author });
-		e.target.reset();
 	};
+
 	return (
 		<section className="bg-white dark:bg-gray-900">
 			<Button className="m-8 hover:bg-[#087b9b]">
 				<Link to={"/articles/category"}>Atrás</Link>
 			</Button>
-
 			<div className="py-8 px-4 mx-auto max-w-2xl lg:pt-8 lg:pb-16">
 				<h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
 					Añadir nueva publicación
 				</h2>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit} ref={formRef}>
 					<div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
 						<div className="sm:col-span-2">
 							<label

@@ -5,6 +5,8 @@ import { getProfileId, getSession } from "@/services/auth";
 import { setPost } from "@/services/submit";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import React from "react";
+
 export const Route = createFileRoute("/experto/post/new")({
 	component: NewPostingComponent,
 });
@@ -12,6 +14,7 @@ export const Route = createFileRoute("/experto/post/new")({
 function NewPostingComponent() {
 	const { toast } = useToast();
 	const queryClient = useQueryClient();
+	const formRef = React.useRef<HTMLFormElement>(null);
 
 	const { data: session } = useQuery({
 		queryKey: ["session"],
@@ -22,45 +25,52 @@ function NewPostingComponent() {
 		queryKey: ["profiles"],
 		queryFn: () => getProfileId(session?.user.id),
 	});
+
+	type PostPayload = {
+		title: string;
+		content: string;
+		imageUrl: string | null;
+	};
+
 	const mutation = useMutation({
-		mutationFn: ({ title, content, imageUrl }) =>
+		mutationFn: async ({ title, content, imageUrl }: PostPayload) =>
 			setPost(title, content, id_user, imageUrl),
 		onSuccess: () => {
-			// Invalidate and refetch
-			toast({
-				title: "Post creado correctamente 😀",
-			});
+			toast({ title: "Post creado correctamente 😀" });
 			queryClient.invalidateQueries({ queryKey: ["posts"] });
+			if (formRef.current) {
+				formRef.current.reset();
+			}
 		},
 		onError: () => {
-			toast({
-				title: "Error al crear el post 😞",
-			});
+			toast({ title: "Error al crear el post 😞" });
 		},
 	});
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const formData = new FormData(e.target);
-		const title = formData.get("title");
-		const content = formData.get("content");
-		const file = formData.get("image");
+		const formData = new FormData(e.currentTarget);
+		const title = String(formData.get("title") || "");
+		const content = String(formData.get("content") || "");
+		const file = formData.get("image") as File | null;
 
-		let imageUrl = null;
+		let imageUrl: string | null = null;
 
-		if (file) {
+		if (file && file instanceof File && file.size > 0) {
+			const uniqueName = `${Date.now()}_${file.name.replace(/\s+/g, "_")}`;
 			const { data, error } = await supabase.storage
 				.from("files")
-				.upload(`posts/${title}`, file);
+				.upload(`posts/${uniqueName}`, file);
 
-			if (error) {
-				console.error(error);
+			if (error || !data) {
+				toast({ title: "Error al subir la imagen 😞" });
+				return;
 			}
 
-			imageUrl = data?.path;
+			imageUrl = data.path;
 		}
+
 		mutation.mutate({ title, content, imageUrl });
-		e.target.reset();
 	};
 
 	return (
@@ -73,7 +83,7 @@ function NewPostingComponent() {
 				<h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
 					Añadir nueva publicación
 				</h2>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit} ref={formRef}>
 					<div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
 						<div className="sm:col-span-2">
 							<label
@@ -130,7 +140,6 @@ function NewPostingComponent() {
 							id='ratio' 
 							min='1' 
 							className='block p-2.5 w-[250px] text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-[#0cc0df] focus:border-[#0cc0df] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0cc0df] dark:focus:border-[#0cc0df] mt-6'/>
-					
 						</div>
 					</div>
 					<button

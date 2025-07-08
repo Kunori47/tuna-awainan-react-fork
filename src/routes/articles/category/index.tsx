@@ -126,8 +126,8 @@ function ArticleRouteComponent() {
                                                 <div className="w-full h-64 md:w-1/2 md:h-auto">
                                                     <img
                                                         className="object-cover w-full h-full"
-                                                        // src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${article.img}`}
-                                                        src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/articles/${article.img}`}
+                                                       //src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${article.img}`}
+                                                        src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/${article.img}`}
                                                         alt={article.title}
                                                     />
                                                 </div>
