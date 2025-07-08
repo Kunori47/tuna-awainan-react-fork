@@ -93,76 +93,105 @@ function ForumComponent() {
 	if (error) return <div>Error: {error.message}</div>;
 
 	return (
-		<div>
-			<div className="mx-8 my-2 font-light text-gray-400">
-				<p>Autor: {forums.profiles.username}</p>
-				<p className="font-light text-gray-400">
-					Fecha:{" "}
-					{forums.created_at
-						? new Date(forums.created_at).toLocaleDateString("es-ES", {
-								day: "2-digit",
-								month: "2-digit",
-								year: "numeric",
-							})
-						: "Unknown Date"}
-				</p>
-			</div>
-			<Button className="m-8 hover:bg-[#087b9b]">
-				<Link to={"/community/forum"}>Atrás</Link>
+	<div className="bg-white min-h-screen">
+		{/* Botón de regreso */}
+		<div className="ml-10 mt-10">
+			<Button 
+				asChild
+				variant="ghost" 
+				className="text-[#0cc0df] hover:bg-transparent hover:text-[#087b9b] px-0"
+			>
+				<Link to={"/community/forum"} className="flex items-center gap-2">
+					<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+					</svg>
+						Volver a comunidad
+				</Link>
 			</Button>
+		</div>
 
-			<div className="max-w-4xl mx-auto p-6 bg-white rounded-xl mb-8">
+			<div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+			{/* Header */}
+			<div className="mb-8">
+				<h1 className="text-4xl font-bold mb-4 tracking-tight">
+				{forums.title.charAt(0).toUpperCase() + forums.title.slice(1)}
+				</h1>
+				<div className="flex items-center gap-3 text-sm text-gray-500">
+					<span className="font-medium text-gray-600">
+						{forums.profiles.username.charAt(0).toUpperCase() + forums.profiles.username.slice(1)}
+					</span>
+					<span className="text-gray-400">·</span>
+					<time dateTime={forums.created_at}>
+						{new Date(forums.created_at).toLocaleDateString("es-ES", {
+						day: "2-digit",
+						month: "long",
+						year: "numeric"
+						})}
+					</time>
+				</div>
+			</div>
+
+			{/* Contenido principal */}
+			<article className="prose lg:prose-xl max-w-none mb-12">
+				{forums.img && (
 				<img
 					src={`https://mlwyobiniqrtpednprrb.supabase.co/storage/v1/object/public/files/posts/${forums.img}`}
 					alt=""
-					className="w-full h-64 object-cover rounded-lg mb-6"
+					className="w-full h-auto rounded-lg mb-8 object-cover shadow-md"
 				/>
+				)}
+				<div className="text-lg leading-relaxed text-gray-700 whitespace-pre-line">
+				{forums.content}
+				</div>
+			</article>
 
-				<h2 className="text-3xl font-bold mb-4">{forums.title}</h2>
+			{/* Mapa */}
+			<div className="my-12">
+				<Map forumid={forumid} className="rounded-lg shadow-lg" />
+			</div>
 
-				<p className="text-gray-700 leading-relaxed">{forums.content}</p>
-				<hr />
-				<Map forumid={forumid}></Map>
-				<form
-					className="mb-6 flex flex-col w-full mt-5"
-					onSubmit={handleSubmit}
-				>
-					<div className="w-full py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-white dark:border-gray-700">
-						<label htmlFor="comment" className="sr-only">
-							Tu comentario
-						</label>
+			{/* Sección de comentarios */}
+			<div className="border-t pt-12">
+				<div className="mb-8">
+					<h3 className="text-2xl font-semibold mb-6">
+						Comentarios ({comments?.length || 0})
+					</h3>
+
+					<form onSubmit={handleSubmit} className="mb-8">
 						<textarea
-							id="comment"
-							name="content"
-							rows={6}
-							className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-white"
-							placeholder="Escribe tu comentario"
-							required
-						></textarea>
-					</div>
-					<button
-						type="submit"
-						className="inline-flex items-center bg-[#0cc0df] ml-auto py-2.5 px-4 text-xs font-medium text-center text-white bg-[p] rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-primary-900 hover:bg-primary-800"
-					>
-						Enviar
-					</button>
-				</form>
+						id="comment"
+						name="content"
+						rows={4}
+						className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#087b9b] focus:border-transparent resize-none bg-white"
+						placeholder="Escribe tu comentario..."
+						required
+						/>
+						<div className="mt-4 flex justify-end">
+						<button
+							type="submit"
+							className="bg-[#0cc0df] hover:bg-[#087b9b] text-white px-6 py-2 rounded-lg text-sm font-medium transition-colors"
+						>
+							Publicar comentario
+						</button>
+						</div>
+					</form>
 
-				<div className="comments-section">
-					<h3 className="mb-4">Comentarios</h3>
-					<div className="grid grid-cols-1 gap-2">
-						{comments?.map((comments) => (
-							<CommentItem
-								username={comments.profiles.username}
-								created_at={comments.created_at}
-								text={comments.content}
-								commentId={comments.id}
-								userid={id_user}
-							></CommentItem>
+					<div className="space-y-8">
+						{comments?.map((comment) => (
+						<CommentItem
+							key={comment.id}
+							username={comment.profiles.username}
+							created_at={comment.created_at}
+							text={comment.content}
+							commentId={comment.id}
+							userid={id_user}
+						/>
 						))}
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 	);
 }
