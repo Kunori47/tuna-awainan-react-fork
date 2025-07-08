@@ -5,8 +5,7 @@ import { setForum } from "@/services/submit";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useToast } from "@/hooks/use-toast";
-import ForumMap from "@/components/map/forumMap";
-import { useState } from "react";
+
 
 export const Route = createFileRoute("/community/forum/new")({
 	component: NewForumComponent,
@@ -15,8 +14,6 @@ export const Route = createFileRoute("/community/forum/new")({
 function NewForumComponent() {
 	const { toast } = useToast();
 	const queryClient = useQueryClient();
-	const [selectedLocation, setSelectedLocation] = useState({ lat: 0, lng: 0 });
-	const [radius, setRadius] = useState(5); // Radio por defecto en km
 
 	const { data: session } = useQuery({
 		queryKey: ["session"],
@@ -29,8 +26,8 @@ function NewForumComponent() {
 	});
 
 	const mutation = useMutation({
-		mutationFn: ({ title, content, imageUrl, latitud, longitud, radio }) =>
-			setForum(title, content, id_user, imageUrl, latitud, longitud, radio),
+		mutationFn: ({ title, content, imageUrl }) =>
+			setForum(title, content, id_user, imageUrl),
 		onSuccess: () => {
 			toast({
 				title: "Post creado correctamente 😀",
@@ -43,10 +40,6 @@ function NewForumComponent() {
 			});
 		},
 	});
-
-	const handleLocationSelect = (location) => {
-		setSelectedLocation(location);
-	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -68,15 +61,7 @@ function NewForumComponent() {
 
 			imageUrl = data?.path;
 		}
-		
-		mutation.mutate({ 
-			title, 
-			content, 
-			imageUrl, 
-			latitud: selectedLocation.lat, 
-			longitud: selectedLocation.lng, 
-			radio: radius 
-		});
+		mutation.mutate({ title, content, imageUrl });
 		e.target.reset();
 	};
 
@@ -86,7 +71,7 @@ function NewForumComponent() {
 				<Link to={"/community/forum"}>Atrás</Link>
 			</Button>
 
-			<div className="py-8 px-4 mx-auto max-w-4xl lg:py-16">
+			<div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
 				<h2 className="mb-4 text-xl font-bold text-gray-900">
 					Añadir nueva publicación
 				</h2>
@@ -135,44 +120,7 @@ function NewForumComponent() {
 							</label>
 							<input type="file" name="image" id="image" accept="posts/*" />
 						</div>
-
-						<div>
-							<label
-								htmlFor="radius"
-								className="block mb-2 text-sm font-medium text-gray-900"
-							>
-								Radio (km)
-							</label>
-							<input
-								type="number"
-								name="radius"
-								id="radius"
-								min="1"
-								max="50"
-								value={radius}
-								onChange={(e) => setRadius(Number(e.target.value))}
-								className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0cc0df] focus:border-[#0cc0df] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0cc0df] dark:focus:border-[#0cc0df]"
-								placeholder="5"
-								required
-							/>
-						</div>
 					</div>
-
-					{/* Mapa interactivo */}
-					<div className="mt-6">
-						<ForumMap onLocationSelect={handleLocationSelect} radius={radius} />
-					</div>
-
-					{/* Información de ubicación seleccionada */}
-					{selectedLocation.lat !== 0 && (
-						<div className="mt-4 p-4 bg-blue-50 rounded-lg">
-							<h4 className="font-medium text-blue-900 mb-2">Ubicación seleccionada:</h4>
-							<p className="text-sm text-blue-700">
-								Latitud: {selectedLocation.lat.toFixed(6)} | Longitud: {selectedLocation.lng.toFixed(6)}
-							</p>
-						</div>
-					)}
-
 					<button
 						type="submit"
 						className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-[#0cc0df] rounded-lg focus:ring-4 focus:ring-[#0cc0df] dark:focus:ring-[#0cc0df] hover:bg-[#0cc0df]"
