@@ -10,15 +10,15 @@ function HomeComponent() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 font">
       <div className='flex flex-col gap-4 items-center justify-center h-screen bg-[#0cc0df]'>
-        <h1 className='text-7xl leading-tight text-center text-white font-extrabold dark:text-white'>
+        <h1 className='text-6xl leading-tight text-center text-white font-extrabold dark:text-white'>
             HEMOS APORTADO <br />
             NUESTRA <br />
             GOTA<br />
             DE AGUA
         </h1>
         <h3 className='text-white text-4xl font-semibold'>¿Te gustaría poner la tuya?</h3>
-        <Button className='hover:bg-[#087b9b] text-md md:text-lg shadow-md'> 
-          <Link to={'/about'}>
+        <Button className='hover:bg-[#087b9b] bg-[#1f9cbe] text-md md:text-lg shadow-md'> 
+          <Link  to={'/about'}>
             Saber más 
           </Link>
         </Button>
