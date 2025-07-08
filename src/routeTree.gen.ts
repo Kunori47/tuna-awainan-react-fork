@@ -19,7 +19,6 @@ import { Route as ExpertoIntroExpertoImport } from './routes/experto/introExpert
 import { Route as CommunityIntroCommunityImport } from './routes/community/introCommunity'
 import { Route as ArticlesIntroArticlesImport } from './routes/articles/introArticles'
 import { Route as ExpertoPostIndexImport } from './routes/experto/post/index'
-import { Route as CommunityForumIndexImport } from './routes/community/forum/index'
 import { Route as AuthRegisterIndexImport } from './routes/auth/register/index'
 import { Route as AuthLoginIndexImport } from './routes/auth/login/index'
 import { Route as ArticlesCategoryIndexImport } from './routes/articles/category/index'
@@ -81,12 +80,6 @@ const ArticlesIntroArticlesRoute = ArticlesIntroArticlesImport.update({
 const ExpertoPostIndexRoute = ExpertoPostIndexImport.update({
   id: '/experto/post/',
   path: '/experto/post/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const CommunityForumIndexRoute = CommunityForumIndexImport.update({
-  id: '/community/forum/',
-  path: '/community/forum/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -281,13 +274,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRegisterIndexImport
       parentRoute: typeof rootRoute
     }
-    '/community/forum/': {
-      id: '/community/forum/'
-      path: '/community/forum'
-      fullPath: '/community/forum'
-      preLoaderRoute: typeof CommunityForumIndexImport
-      parentRoute: typeof rootRoute
-    }
     '/experto/post/': {
       id: '/experto/post/'
       path: '/experto/post'
@@ -351,7 +337,6 @@ export interface FileRoutesByFullPath {
   '/articles/category': typeof ArticlesCategoryIndexRoute
   '/auth/login': typeof AuthLoginIndexRoute
   '/auth/register': typeof AuthRegisterIndexRoute
-  '/community/forum': typeof CommunityForumIndexRoute
   '/experto/post': typeof ExpertoPostIndexRoute
   '/experto/post/map/mapPost': typeof ExpertoPostMapMapPostRoute
   '/aquarium/letter/$letterid': typeof AquariumLetterLetteridIndexRoute
@@ -376,7 +361,6 @@ export interface FileRoutesByTo {
   '/articles/category': typeof ArticlesCategoryIndexRoute
   '/auth/login': typeof AuthLoginIndexRoute
   '/auth/register': typeof AuthRegisterIndexRoute
-  '/community/forum': typeof CommunityForumIndexRoute
   '/experto/post': typeof ExpertoPostIndexRoute
   '/experto/post/map/mapPost': typeof ExpertoPostMapMapPostRoute
   '/aquarium/letter/$letterid': typeof AquariumLetterLetteridIndexRoute
@@ -402,7 +386,6 @@ export interface FileRoutesById {
   '/articles/category/': typeof ArticlesCategoryIndexRoute
   '/auth/login/': typeof AuthLoginIndexRoute
   '/auth/register/': typeof AuthRegisterIndexRoute
-  '/community/forum/': typeof CommunityForumIndexRoute
   '/experto/post/': typeof ExpertoPostIndexRoute
   '/experto/post/map/mapPost': typeof ExpertoPostMapMapPostRoute
   '/aquarium/letter/$letterid/': typeof AquariumLetterLetteridIndexRoute
@@ -429,7 +412,6 @@ export interface FileRouteTypes {
     | '/articles/category'
     | '/auth/login'
     | '/auth/register'
-    | '/community/forum'
     | '/experto/post'
     | '/experto/post/map/mapPost'
     | '/aquarium/letter/$letterid'
@@ -453,7 +435,6 @@ export interface FileRouteTypes {
     | '/articles/category'
     | '/auth/login'
     | '/auth/register'
-    | '/community/forum'
     | '/experto/post'
     | '/experto/post/map/mapPost'
     | '/aquarium/letter/$letterid'
@@ -477,7 +458,6 @@ export interface FileRouteTypes {
     | '/articles/category/'
     | '/auth/login/'
     | '/auth/register/'
-    | '/community/forum/'
     | '/experto/post/'
     | '/experto/post/map/mapPost'
     | '/aquarium/letter/$letterid/'
@@ -503,7 +483,6 @@ export interface RootRouteChildren {
   ArticlesCategoryIndexRoute: typeof ArticlesCategoryIndexRoute
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
   AuthRegisterIndexRoute: typeof AuthRegisterIndexRoute
-  CommunityForumIndexRoute: typeof CommunityForumIndexRoute
   ExpertoPostIndexRoute: typeof ExpertoPostIndexRoute
   ExpertoPostMapMapPostRoute: typeof ExpertoPostMapMapPostRoute
   AquariumLetterLetteridIndexRoute: typeof AquariumLetterLetteridIndexRoute
@@ -528,7 +507,6 @@ const rootRouteChildren: RootRouteChildren = {
   ArticlesCategoryIndexRoute: ArticlesCategoryIndexRoute,
   AuthLoginIndexRoute: AuthLoginIndexRoute,
   AuthRegisterIndexRoute: AuthRegisterIndexRoute,
-  CommunityForumIndexRoute: CommunityForumIndexRoute,
   ExpertoPostIndexRoute: ExpertoPostIndexRoute,
   ExpertoPostMapMapPostRoute: ExpertoPostMapMapPostRoute,
   AquariumLetterLetteridIndexRoute: AquariumLetterLetteridIndexRoute,
@@ -562,7 +540,6 @@ export const routeTree = rootRoute
         "/articles/category/",
         "/auth/login/",
         "/auth/register/",
-        "/community/forum/",
         "/experto/post/",
         "/experto/post/map/mapPost",
         "/aquarium/letter/$letterid/",
@@ -615,9 +592,6 @@ export const routeTree = rootRoute
     },
     "/auth/register/": {
       "filePath": "auth/register/index.tsx"
-    },
-    "/community/forum/": {
-      "filePath": "community/forum/index.tsx"
     },
     "/experto/post/": {
       "filePath": "experto/post/index.tsx"
